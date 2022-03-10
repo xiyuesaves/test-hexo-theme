@@ -1,0 +1,25 @@
+title: xiling-theme
+
+author: 曦月
+avatar: /img/avatar.png  #头像路径
+introduction: 欢迎啦~  #欢迎词
+
+menu:
+  - home
+  - archives
+  - categories
+  - tags
+  - about
+
+nav:
+  导航: 
+    首页: 
+      icon: i-home
+      url: /
+    关于:
+      icon: icon-yemian-copy-copy
+      url: /about
+
+
+# 背景图
+backgroundImage: /img/bg.jpg

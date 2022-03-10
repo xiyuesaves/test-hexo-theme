@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><%- config.title %></title>
+	<!-- 所有样式全在此处一次性加载 -->
+	<!-- 主要样式 -->
+	<%- css('css/main.css') %>
+	<!-- 首页样式 -->
+	<%- css('css/index.css') %>
+	<!-- 文章页样式 -->
+	<%- css('css/post.css') %>
+	<%- css('//at.alicdn.com/t/font_3205213_s33soh0iibg.css')%>
+</head>
+<body>
+	<%- include("header.ejs") %>
+	<div id="main">
+		<!-- 正文 -->
+		<div id="main-block">
+			<!-- 居中内容块 -->
+			<div class="center-block">
+			    <!-- 主内容 -->
+				<%- body %>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- 脚本 -->
+<%- js('js/SmoothScroll.min.js') %>
+<%- js('js/chineseColor.js') %>
+<%- js('js/pjax.min.js') %>
+<%- js('js/topbar.min.js') %>
+<%- js('js/main.js') %>
+</html>

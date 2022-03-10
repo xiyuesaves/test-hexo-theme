@@ -1,0 +1,43 @@
+<div id="top-nav">
+	<div class="center-block">
+		<%
+			// 判断选择哪个选项
+			function hasActive(name) {
+				let thisName = page.base || page.layout || "home";
+				// console.log(thisName.includes(name),thisName,name)
+				if (thisName.includes(name)) {
+					return "active";
+				}
+				return "";
+			}
+			let bgPic = page.picture ? page.picture.pic ? page.picture.pic : theme.backgroundImage : theme.backgroundImage;
+			console.log(page)
+			theme.menu.forEach(el => {
+		%>
+			<a class="back-link icons i-<%- el %> <%-hasActive(el)%>" href="/<%-el !== 'home' ? el : '' %>"><%-el%></a>
+		<%
+			})
+		%>
+	</div>
+</div>
+
+<%
+    // 判断标题如何显示
+    // console.log("tags",page)
+    let title = page.tag ? `${page.tag} 标签下的文章` : page.category ? `${page.category} 分类下的文章` : page.title ? page.title : config.title,
+        subtitle = config.subtitle;
+    // if (page.tag) {
+    //     title = `${page.tag} 标签下的文章`;
+    //     subtitle = `共有 ${page.posts.length} 篇`
+    // } else if (page.category) {
+    //     title = `${page.category} 分类下的文章`;
+    //     subtitle = `共有 ${page.posts.length} 篇`
+    // }
+%>
+
+<div id="top-pic">
+	<div class="top-title">
+		<h1 class="big-title"><%-title%></h1>
+	</div>
+	<div class="bgi shadow-blur" style="background-image:url(<%-bgPic%>)"></div>
+</div>
