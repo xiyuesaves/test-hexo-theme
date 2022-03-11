@@ -7,7 +7,7 @@ topbar.config({
 	barThickness: 3
 });
 
-// body高度设置
+// 滚动限制
 const bodyHeight = {
 	hasScroll: true,
 	wellFun: M,
@@ -46,6 +46,7 @@ const pjax = new Pjax({
 			mainEl.addEventListener("transitionend", () => {
 				mainEl.style.opacity = 1;
 				oldEl.outerHTML = newEl.outerHTML;
+				// 页面加载完成后释放滚动
 				bodyHeight.release();
 				this.onSwitch();
 			}, { once: true });
@@ -71,21 +72,23 @@ const pjax = new Pjax({
 				bgiUrl = newEl.querySelector(".bgi").style.backgroundImage
 			changeTitle();
 			// 图片相同则不进行替换
-			if (picEl.getAttribute("pic-url") !== bgiUrl) {
+			if (picEl.style.backgroundImage !== bgiUrl) {
 				// 利用缓存机制让顶部图片加载完成后再进行替换
-				let newPic = document.createElement("div");
-					getImage(bgiUrl.replace(/^url\("/, "").replace(/"\)$/, ""), (base64) => {
-						newPic.className = "bgi";
-						newPic.setAttribute("pic-url", bgiUrl);
-						newPic.style.backgroundImage = `url(${base64})`;
-						picEl.parentNode.appendChild(newPic);
-						picEl.className += " hidden";
-						picEl.addEventListener("transitionend", () => {
-							picEl.remove();
-							newPic.className += " shadow-blur";
-							this.onSwitch();
-						}, { once: true });
-					});
+				let newPic = document.createElement("div"),
+					picUrl = bgiUrl.replace(/^url\("/, "").replace(/"\)$/, ""),
+					newImg = document.createElement("img");
+				newImg.src = picUrl;
+				newImg.onload = () => {
+					newPic.className = "bgi";
+					newPic.style.backgroundImage = bgiUrl;
+					picEl.parentNode.appendChild(newPic);
+					picEl.className += " hidden";
+					picEl.addEventListener("transitionend", () => {
+						picEl.remove();
+						newPic.className += " shadow-blur";
+						this.onSwitch();
+					}, { once: true });
+				}
 			} else {
 				this.onSwitch();
 			}
@@ -102,28 +105,6 @@ const pjax = new Pjax({
 	},
 	timeout: 5000
 });
-
-// 图片转base64
-function image2Base64(img) {
-	var canvas = document.createElement("canvas");
-	canvas.width = img.width;
-	canvas.height = img.height;
-	var ctx = canvas.getContext("2d");
-	ctx.drawImage(img, 0, 0, img.width, img.height);
-	var dataURL = canvas.toDataURL("image/png");
-	return dataURL;
-}
-
-function getImage(url, callback) {
-	let imgObj = new Image();
-	imgObj.src = url;
-	imgObj.onload = () => {
-		let base64 = image2Base64(imgObj);
-		if (callback) {
-			callback(base64);
-		}
-	}
-}
 
 // 重写滚动函数,强制使用过渡效果
 let rewScroll = window.scrollTo;
