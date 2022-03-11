@@ -1,17 +1,19 @@
+<%
+	// 判断选择哪个选项
+	function hasActive(name) {
+		let thisName = page.base || page.layout || "home";
+		// console.log(thisName.includes(name),thisName,name)
+		if (thisName.includes(name)) {
+			return "active";
+		}
+		return "";
+	}
+	let bgPic = page.picture ? page.picture.pic ? page.picture.pic : theme.backgroundImage : theme.backgroundImage;
+	// console.log(page)
+%>
 <div id="top-nav">
 	<div class="center-block">
 		<%
-			// 判断选择哪个选项
-			function hasActive(name) {
-				let thisName = page.base || page.layout || "home";
-				// console.log(thisName.includes(name),thisName,name)
-				if (thisName.includes(name)) {
-					return "active";
-				}
-				return "";
-			}
-			let bgPic = page.picture ? page.picture.pic ? page.picture.pic : theme.backgroundImage : theme.backgroundImage;
-			console.log(page)
 			theme.menu.forEach(el => {
 		%>
 			<a class="back-link icons i-<%- el %> <%-hasActive(el)%>" href="/<%-el !== 'home' ? el : '' %>"><%-el%></a>
@@ -22,22 +24,63 @@
 </div>
 
 <%
-    // 判断标题如何显示
-    // console.log("tags",page)
-    let title = page.tag ? `${page.tag} 标签下的文章` : page.category ? `${page.category} 分类下的文章` : page.title ? page.title : config.title,
-        subtitle = config.subtitle;
-    // if (page.tag) {
-    //     title = `${page.tag} 标签下的文章`;
-    //     subtitle = `共有 ${page.posts.length} 篇`
-    // } else if (page.category) {
-    //     title = `${page.category} 分类下的文章`;
-    //     subtitle = `共有 ${page.posts.length} 篇`
-    // }
+	let title = config.title,
+		subtitle = config.subtitle,
+		isPost = false;
+
+	console.log(page)
+	if(page.layout){
+		switch(page.layout){ // 主要页面
+			case "archives":
+			title = "归档";
+			subtitle = `?`
+			break;
+			case "tags":
+			title = "标签";
+			subtitle = `共有 ${site.tags.length} 个标签`
+			break;
+			case "categories":
+			title = "分类";
+			subtitle = `共有 ${site.categories.length} 分类标签`
+			break;
+			case "about":
+			title = "关于";
+			subtitle = `你想了解点什么呢`
+			break;
+			default: // 子页面
+			otherPage();
+			break;
+		}
+	} else if(page.__index){
+		// 首页
+		title = config.title;
+		subtitle = config.subtitle;
+	} else if(page.archive){
+		// 归档页
+		title = "归档";
+		subtitle = "在时间中寻找答案";
+	}
+
+	function otherPage(){
+		if(page.tag){ // tag
+			title = page.tag;
+			subtitle = `此标签下共有 ${page.posts.length} 篇`;
+		} else if(page.category){ // 分类
+			title = page.category;
+			subtitle = `此分类下共有 ${page.posts.length} 篇`;
+		} else { // 文章详情
+			title = page.title;
+			isPost = true;
+		}
+	}
 %>
 
 <div id="top-pic">
 	<div class="top-title">
-		<h1 class="big-title"><%-title%></h1>
+		<div class="center-box">
+			<h1 class="big-title"><%-title%></h1>
+    	<p class="sm-title"><%-subtitle %></p>
+		</div>
 	</div>
 	<div class="bgi shadow-blur" style="background-image:url(<%-bgPic%>)"></div>
 </div>
