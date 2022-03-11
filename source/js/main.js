@@ -48,7 +48,7 @@ const pjax = new Pjax({
 				oldEl.outerHTML = newEl.outerHTML;
 				bodyHeight.release();
 				this.onSwitch();
-			}, { once: true })
+			}, { once: true });
 		},
 		"#top-nav .center-block"(oldEl, newEl) { // 顶栏
 			let selectPage = newEl.querySelector(".active"),
@@ -62,33 +62,34 @@ const pjax = new Pjax({
 					if (el.innerText === selectPage.innerText) {
 						el.className += " active";
 					}
-				})
+				});
 			}
 			this.onSwitch();
 		},
 		"#top-pic"(oldEl, newEl) { // banner图
-			let picEl = document.querySelector("#top-pic .bgi");
+			let picEl = document.querySelector("#top-pic .bgi"),
+				bgiUrl = newEl.querySelector(".bgi").style.backgroundImage
 			changeTitle();
 			// 图片相同则不进行替换
-			if (picEl.style.backgroundImage !== newEl.querySelector(".bgi").style.backgroundImage) {
+			if (picEl.getAttribute("pic-url") !== bgiUrl) {
 				// 利用缓存机制让顶部图片加载完成后再进行替换
-				let newPic = document.createElement("div"),
-					newImg = document.createElement("img");
-				newImg.src = newEl.querySelector(".bgi").style.backgroundImage.replace(/^url\("/, "").replace(/"\)$/, "");
-				newImg.onload = () => {
-					newPic.className = "bgi";
-					newPic.style.backgroundImage = newEl.querySelector(".bgi").style.backgroundImage;
-					picEl.parentNode.appendChild(newPic);
-					picEl.className += " hidden";
-					picEl.addEventListener("transitionend", () => {
-						picEl.remove();
-						newPic.className += " shadow-blur";
-						this.onSwitch();
-					}, { once: true });
-				}
+				let newPic = document.createElement("div");
+					getImage(bgiUrl.replace(/^url\("/, "").replace(/"\)$/, ""), (base64) => {
+						newPic.className = "bgi";
+						newPic.setAttribute("pic-url", bgiUrl);
+						newPic.style.backgroundImage = `url(${base64})`;
+						picEl.parentNode.appendChild(newPic);
+						picEl.className += " hidden";
+						picEl.addEventListener("transitionend", () => {
+							picEl.remove();
+							newPic.className += " shadow-blur";
+							this.onSwitch();
+						}, { once: true });
+					});
 			} else {
 				this.onSwitch();
 			}
+
 			function changeTitle() {
 				let picTitle = document.querySelector("#top-pic .top-title");
 				picTitle.style.opacity = 0;
@@ -100,7 +101,29 @@ const pjax = new Pjax({
 		}
 	},
 	timeout: 5000
-})
+});
+
+// 图片转base64
+function image2Base64(img) {
+	var canvas = document.createElement("canvas");
+	canvas.width = img.width;
+	canvas.height = img.height;
+	var ctx = canvas.getContext("2d");
+	ctx.drawImage(img, 0, 0, img.width, img.height);
+	var dataURL = canvas.toDataURL("image/png");
+	return dataURL;
+}
+
+function getImage(url, callback) {
+	let imgObj = new Image();
+	imgObj.src = url;
+	imgObj.onload = () => {
+		let base64 = image2Base64(imgObj);
+		if (callback) {
+			callback(base64);
+		}
+	}
+}
 
 // 重写滚动函数,强制使用过渡效果
 let rewScroll = window.scrollTo;
@@ -109,7 +132,7 @@ window.scrollTo = function(...options) {
 		top: options[1],
 		left: options[0],
 		behavior: "smooth"
-	})
+	});
 }
 
 // 监听pjax事件展示加载进度条
@@ -126,8 +149,8 @@ document.addEventListener('pjax:complete', () => {
 
 function showScroll() {
 	if (document.body.scrollHeight > window.innerHeight) {
-		console.log("展示滚动条")
+		console.log("展示滚动条");
 	} else {
-		console.log("移除滚动条")
+		console.log("移除滚动条");
 	}
 }
