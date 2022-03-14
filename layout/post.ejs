@@ -1,69 +1,14 @@
-<%
-	let contentStr = page.content.replace(/<\/?[^>]+>/g,""),
-		maxNum = 52,
-		readTime = Math.ceil(contentStr.length / 200),
-		releaseDate = new Date(page.date).toLocaleString("zh-CN",{hour12: false, year:'numeric', month:'long', day:'numeric', hour:'2-digit',minute:'2-digit',second:'2-digit'}),
-		categories = page.categories.length ? page.categories.data[page.categories.length - 1] : {name:"有个笨蛋忘记设置分类了"};
-		preface = "";
-%>
-<div class="title-block">
-    <p class="big-title"><%- page.title %></p>
-    <span class="sm-title">
-		<i class="icons i-date"><p class="of-ellipsis" title="<%- new Date(page.date) %>"><%- releaseDate %></p></i>
-    	<i class="icons i-read"><p class="of-ellipsis" title="<%- contentStr.length %>字"><%- readTime %> 分钟</p></i>
-    	<i class="icons i-see" style="display: none;"><span title="总阅读量"></span></i>
-	<%
-		if (categories.permalink) {
-	%>
-		<i class="icons i-archives"><a class="of-ellipsis" href="<%- categories.permalink %>" title="看看这个分类下的其他文章？" ><%- categories.name %></a></i>
-	<%
-		}
-	%>
-
-<%
-	if (page.tags.length) {
-%>
-		<i class="icons i-tag">
-		<%
-			page.tags.forEach((tag, index) => {
-		%>
-			<%- index ? "、" : "" %><a class="of-ellipsis tag" href="<%- tag.permalink %>" title="<%- tag.name %>" ><%- tag.name %></a>
-		<%
-			})
-		%>
-		</i>
-<%
-	}
-%>
-    </span>
-</div>
-<div class="post-nav">
-	<a href="/">
-		<i class="icons i-home"></i>
-		主页
-	</a>
-<%
-	page.categories.forEach(categories => {
-%>
-	<span>/</span>
-	<a href="<%- categories.permalink %>"><%- categories.name %></a>
-<%
-	})
-%>
-	<span>/</span>
-	<p>当前文章</p>
-</div>
+<!-- 文章页样式 -->
+<%- css('css/post.css') %>
 <div class="post-content">
-	<div class="top-pic" style="background-image: url(<%- page.picture.pic %>);"></div>
-	<div class="post">
-	<%
-		if (page.picture.url) {
-	%>
-		<p class="head-pic">头图：<a href="<%- page.picture.url %>"><%- page.picture.name %></a></p><br>
-	<%
-		}
-	%>
-		<%- page.content %>
+	<div>
+		<div class="post markdown-body">
+			<%- page.content %>
+		</div>
+	</div>
+	
+	<div class="detail">
+		
 	</div>
 </div>
 <div id="gitalk-container">
