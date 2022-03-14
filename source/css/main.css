@@ -262,3 +262,68 @@ body {
 	width: 800px;
 	margin: 60px auto 0;
 }
+
+
+/* 代码块 */
+.post-content .highlight{
+	border-radius: 8px;
+	margin-left: 0;
+	margin-right: 0;
+	box-sizing: border-box;
+	background-color: #1c1b19;
+}
+.post-content .highlight tr{
+	display: flex;
+}
+.post-content .highlight tr pre{
+	margin: 0;
+}
+.post-content .highlight .gutter{
+	user-select: none;
+	pointer-events: none;
+	padding: 8px 4px 0 6px;
+	color: #918175;
+}
+.post-content .highlight .code code{
+	padding: 8px;
+}
+.post-content .highlight table td{
+	max-width: calc(710px + 37px);
+	border-radius: 8px;
+}
+
+/* 滚动条整体 */
+.post-content .highlight table *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+/* 滚动条背景 */
+.post-content .highlight table *::-webkit-scrollbar-track-piece {
+    background-color: #1c1b19;
+}
+/* 滚动条按钮 */
+.post-content .highlight table *::-webkit-scrollbar-button {
+    display: none;
+}
+/* 滚动条滑块 */
+.post-content .highlight table *::-webkit-scrollbar-thumb {
+    background-color: #918175;
+    border-radius: 4px;
+    box-shadow: 0 0 4px #918175;
+}
+
+
+.post-content .highlight .code *::selection {
+    color: inherit;
+    background: rgba(252, 232, 195, 0.3);
+}
+
+.post-content .highlight .code *::-moz-selection {
+    color: inherit;
+    background: rgba(252, 232, 195, 0.3);
+}
+
+.post-content .highlight .code *::-webkit-selection {
+    color: inherit;
+    background: rgba(252, 232, 195, 0.3);
+}

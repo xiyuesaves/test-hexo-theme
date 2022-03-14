@@ -1,0 +1,28 @@
+#main-block .center-block{
+	width: 1200px;
+}
+.post-content{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.post-content .post{
+	transition: box-shadow 300ms;
+	width: 800px;
+	background: #ffffff;
+	border-radius: 8px;
+	padding: 15px;
+}
+.post-content .post{
+	box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+.post-content .detail{
+	transition: box-shadow 300ms;
+	width: 380px;
+	height: 100px;
+	background-color: #ffffff;
+	border-radius: 8px;
+}
+.post-content .detail{
+	box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
