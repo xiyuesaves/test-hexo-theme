@@ -31,17 +31,13 @@
 	console.log(page)
 	if(page.layout){
 		switch(page.layout){ // 主要页面
-			case "archives":
-			title = "归档";
-			subtitle = `?`
-			break;
 			case "tags":
 			title = "标签";
 			subtitle = `共有 ${site.tags.length} 个标签`
 			break;
 			case "categories":
 			title = "分类";
-			subtitle = `共有 ${site.categories.length} 分类标签`
+			subtitle = `共有 ${site.categories.length} 个分类`
 			break;
 			case "about":
 			title = "关于";
