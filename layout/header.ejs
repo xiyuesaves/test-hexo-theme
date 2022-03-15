@@ -9,7 +9,7 @@
 	}
 	let bgPic = page.picture ? page.picture.pic ? page.picture.pic : theme.backgroundImage : theme.backgroundImage;
 %>
-<div id="top-nav">
+<div id="fixel-nav" class="head-nav" style="transform: translateY(-100%)">
 	<div class="center-block">
 		<%
 			theme.menu.forEach(el => {
@@ -67,6 +67,20 @@
 %>
 
 <div id="top-pic">
+	<div id="top-nav" class="head-nav">
+		<div class="center-block">
+			<a class="about"  href="/about"><%-config.author%></a>
+			<div class="menu-item">
+				<%
+					theme.menu.forEach(el => {
+				%>
+					<a class="back-link icons i-<%- el %>" href="/<%-el !== 'home' ? el : '' %>"><%-el%></a>
+				<%
+					})
+				%>
+			</div>
+		</div>
+	</div>
 	<div class="top-title">
 		<div class="center-box">
 <%if(!isPost){%>

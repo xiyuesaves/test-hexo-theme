@@ -6,6 +6,19 @@ topbar.config({
 	barThickness: 3
 });
 
+// 切换顶部导航
+let fixelEl = document.querySelector("#fixel-nav")
+window.onscroll = function() {
+  //为了保证兼容性，这里取两个值，哪个有值取哪一个
+  //scrollTop就是触发滚轮事件时滚轮的高度
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  if(scrollTop > 40){
+  	fixelEl.style.transform = "translateY(0%)";
+  } else {
+  	fixelEl.style.transform = "translateY(-100%)";
+  }
+}
+
 // 滚动限制
 const bodyHeight = {
 	hasScroll: true,
@@ -42,7 +55,7 @@ const bodyHeight = {
 
 // 启用pjax局部刷新
 const pjax = new Pjax({
-	selectors: ["#top-nav .center-block", "#main-block .center-block", "#top-pic"],
+	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic"],
 	cacheBust: false,
 	scrollTo: false,
 	scrollRestoration: false,
@@ -58,10 +71,10 @@ const pjax = new Pjax({
 				this.onSwitch();
 			}, { once: true });
 		},
-		"#top-nav .center-block"(oldEl, newEl) { // 顶栏
+		"#fixel-nav .center-block"(oldEl, newEl) { // 顶栏
 			let selectPage = newEl.querySelector(".active"),
-				thisPage = document.querySelectorAll("#top-nav .center-block .back-link"),
-				thisActive = document.querySelector("#top-nav .center-block .back-link.active");
+				thisPage = document.querySelectorAll("#fixel-nav .center-block .back-link"),
+				thisActive = document.querySelector("#fixel-nav .center-block .back-link.active");
 			if (thisActive) {
 				thisActive.className = thisActive.className.replace(" active", "");
 			}
