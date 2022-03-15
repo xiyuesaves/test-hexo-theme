@@ -43,6 +43,7 @@
 	</div>
 	<!-- 简介 -->
 	<div class="detail">
+		<!-- 用户信息 -->
 		<div class="user-info">
 			<div class="avatar" style="background-image:url(<%-theme.avatar%>)">		</div>
 			<h1 class="author"><%-config.author%></h1>
@@ -60,6 +61,35 @@
 					<i class="icons i-tags"></i>
 					<%-site.tags.length%>
 				</span>
+			</div>
+		</div>
+		<!-- tag -->
+		<div class="other-box">
+			<h1 class="big-title">
+				<i class="icons i-tags"></i>
+				TAGS
+			</h1>
+			<div class="list-item">
+				<%
+					// 取出tag列表
+					let tags = site.tags.map(el => el)
+					// 进行排序
+					tags.sort((ela,elb) => elb.length - ela.length)
+					// 输出
+					tags.forEach(el => {
+				%>
+					<a href="/<%-el.path%>" title="<%-el.length%> 篇" class="tag" style="font-size:<%-13+el.length%>px"><%-el.name%></a>
+				<%console.log(el.length)})%>
+			</div>
+		</div>
+		<!-- tag -->
+		<div class="other-box">
+			<h1 class="big-title">
+				<i class="icons i-categories"></i>
+				CATEGORYS
+			</h1>
+			<div class="list-item">
+				<a href="" style="font-size:14px">测试标签</a>
 			</div>
 		</div>
 	</div>

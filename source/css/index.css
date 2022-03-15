@@ -1,8 +1,8 @@
 .flex-item {
 	width: 1200px;
 	display: flex;
-	justify-content: space-between;
 	align-items: flex-start;
+	justify-content: space-between;
 }
 
 .flex-item .post-list {
@@ -11,44 +11,42 @@
 
 .flex-item .post-list .post {
 	width: 100%;
+	padding: 15px;
 	margin: 0 auto;
 	min-height: 100px;
-	margin-bottom: 28px;
 	border-radius: 8px;
-	padding: 15px;
+	margin-bottom: 28px;
 	background: rgba(255, 255, 255, 1);
-	/*border: solid 1px rgba(0, 0, 0, 0.2);*/
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 .flex-item .post-list .post .link.title {
-	font-weight: bold;
-	/*float: left;*/
-	max-width: 100%;
 	height: 24px;
-	margin-bottom: 14px;
+	max-width: 100%;
 	font-size: 18px;
-	display: inline-block;
-	white-space: nowrap;
 	overflow: hidden;
+	font-weight: bold;
+	white-space: nowrap;
+	margin-bottom: 14px;
+	display: inline-block;
 	text-overflow: ellipsis;
 }
 
 .flex-item .post-list .post .introduction {
-	font-size: 14px;
 	width: 100%;
 	height: auto;
+	font-size: 14px;
 }
 
 .flex-item .post-list .post .other-data {
 	width: 100%;
 	height: auto;
 	display: flex;
-	align-items: center;
-	justify-content: flex-start;
 	flex-wrap: wrap;
 	margin-top: 8px;
+	align-items: center;
 	padding-right: 158px;
+	justify-content: flex-start;
 }
 
 .flex-item .post-list .post .other-data .delimiter::after {
@@ -78,59 +76,98 @@
 }
 
 .flex-item .post-list .post .date * {
-	font-size: 13px;
 	color: #aaaaaa;
+	font-size: 13px;
 }
 
 .flex-item .post-list .post .date .icons {
 	margin-right: 4px;
 }
-.flex-item .detail .user-info{
-	padding: 15px;
-	background-color: #ffffff;
-	border-radius: 8px;
-	box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+
+.flex-item .detail .user-info {
+	width: 100%;
+	height: auto;
 	display: flex;
+	padding: 15px;
+	border-radius: 8px;
 	align-items: center;
-	justify-content: flex-start;
+	margin-bottom: 28px;
 	flex-direction: column;
+	background-color: #ffffff;
+	justify-content: flex-start;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
+
 .flex-item .detail .user-info .avatar {
 	width: 125px;
 	height: 125px;
 	border-radius: 50%;
+	margin: 10px 0 12px;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	margin: 10px 0 12px;
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 .flex-item .detail .user-info .author {
 	font-size: 20px;
 	font-weight: bold;
+	margin-bottom: 8px;
 	letter-spacing: 2px;
 	/*仅用于拉伸亿点点字间距*/
 	text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-	margin-bottom: 8px;
 }
 
-.flex-item .detail .user-info .subtitle{
+.flex-item .detail .user-info .subtitle {
 	font-size: 14px;
-	text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 	margin-bottom: 16px;
+	text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.flex-item .detail .user-info .count-item{
+.flex-item .detail .user-info .count-item {
 	width: 100%;
 	height: 30px;
 	display: flex;
+	font-size: 14px;
 	align-items: center;
 	justify-content: space-around;
-	font-size: 14px;
 }
 
-.flex-item .detail .user-info .count-item .icons:before{
+.flex-item .detail .user-info .count-item .icons:before {
 	font-size: 22px;
 	margin-right: 4px;
+}
+
+.flex-item .detail .other-box {
+	width: 100%;
+	height: auto;
+	padding: 15px 30px;
+	border-radius: 8px;
+	margin-bottom: 28px;
+	background-color: #ffffff;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.flex-item .detail .other-box .big-title {
+	font-size: 22px;
+	margin-bottom: 16px;
+}
+
+.flex-item .detail .other-box .big-title .icons:before {
+	font-size: 26px;
+}
+
+.flex-item .detail .other-box .list-item {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	align-content: flex-start;
+	justify-content: flex-start;
+}
+
+.flex-item .detail .other-box .list-item .tag{
+	padding: 4px;
+	margin: 0 4px 4px 0;
 }
