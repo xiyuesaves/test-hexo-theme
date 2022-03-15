@@ -1,16 +1,27 @@
-.post {
+.flex-item {
+	width: 1200px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.flex-item .post-list {
+	width: 850px;
+}
+
+.flex-item .post-list .post {
 	width: 100%;
 	margin: 0 auto;
 	min-height: 100px;
 	margin-bottom: 28px;
 	border-radius: 8px;
 	padding: 15px;
-	background: rgba(255,255,255, 1);
+	background: rgba(255, 255, 255, 1);
 	/*border: solid 1px rgba(0, 0, 0, 0.2);*/
-	box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
-.post .link.title {
+.flex-item .post-list .post .link.title {
 	font-weight: bold;
 	/*float: left;*/
 	max-width: 100%;
@@ -23,20 +34,13 @@
 	text-overflow: ellipsis;
 }
 
-.post .introduction {
+.flex-item .post-list .post .introduction {
 	font-size: 14px;
 	width: 100%;
 	height: auto;
-/*	text-overflow: -o-ellipsis-lastline;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	margin-bottom: 24px;*/
 }
 
-.post .other-data {
+.flex-item .post-list .post .other-data {
 	width: 100%;
 	height: auto;
 	display: flex;
@@ -46,35 +50,87 @@
 	margin-top: 8px;
 	padding-right: 158px;
 }
-.post .other-data .delimiter::after{
+
+.flex-item .post-list .post .other-data .delimiter::after {
 	content: "/";
 	margin: 0 4px;
 }
 
-.post .other-data * {
+.flex-item .post-list .post .other-data * {
 	color: #999999;
 	font-size: 14px;
 }
 
-.post .other-data .tag{
+.flex-item .post-list .post .other-data .tag {
 	margin-right: 8px;
 }
 
-.post .other-data *:before {
+.flex-item .post-list .post .other-data *:before {
 	margin-right: 4px;
 }
 
-.post .date{
+.flex-item .post-list .post .date {
 	width: auto;
-	float:right;
+	float: right;
 	text-align: right;
 	line-height: 19px;
 	margin-top: -19px;
 }
-.post .date *{
+
+.flex-item .post-list .post .date * {
 	font-size: 13px;
 	color: #aaaaaa;
 }
-.post .date .icons{
+
+.flex-item .post-list .post .date .icons {
+	margin-right: 4px;
+}
+.flex-item .detail .user-info{
+	padding: 15px;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+.flex-item .detail .user-info .avatar {
+	width: 125px;
+	height: 125px;
+	border-radius: 50%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin: 10px 0 12px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.flex-item .detail .user-info .author {
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	/*仅用于拉伸亿点点字间距*/
+	text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	margin-bottom: 8px;
+}
+
+.flex-item .detail .user-info .subtitle{
+	font-size: 14px;
+	text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	margin-bottom: 16px;
+}
+
+.flex-item .detail .user-info .count-item{
+	width: 100%;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 14px;
+}
+
+.flex-item .detail .user-info .count-item .icons:before{
+	font-size: 22px;
 	margin-right: 4px;
 }

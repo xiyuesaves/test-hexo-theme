@@ -1,42 +1,66 @@
-<!-- 首页样式 -->
-<%- css('css/index.css') %>
-
 <!-- 文章列表 -->
-<div class="post-list">
-<%
-
-	page.posts.forEach(post => {
-      let releaseDate = new Date(post.date).toLocaleString("zh-CN",{hour12: false, year:'numeric', month:'long', day:'numeric', hour:'2-digit',minute:'2-digit',second:'2-digit'}),
-			preface = "";
-%>
-	<div class="post">
-		<a class="link title" href="<%- post.path %>"><%- post.title %></a>
-		<div class="introduction markdown-body">
-			<%-post.excerpt%>
-		</div>
-<%if(post.categories.length){%>
-		<div class="other-data categories">
-			<i class="icons i-categories"></i>
-			<%post.categories.forEach((el, index) => {%>
-				<%if(index){%>
-					<span class="delimiter"></span>
-				<%}%>
-				<a class="category" href="/<%-el.path%>"><%-el.name%></a>
-			<%})%>
-		</div>
-<%}%>
-		<div class="other-data tags">
-<%if(post.tags.length){%>
-			<%post.tags.forEach(el => {%>
+<div class="flex-item">
+	<!-- 文章列表 -->
+	<div class="post-list">
+	<%
+	// 这ejs什么破语法啊(摔
+		page.posts.forEach(post => {
+	      let releaseDate = new Date(post.date).toLocaleString("zh-CN",{hour12: false, year:'numeric', month:'long', day:'numeric'	, hour:'2-digit',minute:'2-digit',second:'2-digit'}),
+				preface = "";
+	%>
+		<div class="post">
+			<a class="link title" href="<%- post.path %>"><%- post.title %></a>
+			<div class="introduction markdown-body">
+				<%-post.excerpt%>
+			</div>
+	<%if(post.categories.length){%>
+			<div class="other-data categories">
+				<i class="icons i-categories"></i>
+				<%post.categories.forEach((el, index) => {%>
+					<%if(index){%>
+						<span class="delimiter"></span>
+					<%}%>
+					<a class="category" href="/<%-el.path%>"><%-el.name%></a>
+				<%})%>
+			</div>
+	<%}%>
+	<%if(post.tags.length){%>
+			<div class="other-data tags">
+				<%post.tags.forEach(el => {%>
 				<a class="tag" href="/<%-el.path%>"><i class="icons i-tags"></i><%-el.name%></a>
-			<%})%>
-<%} else {%>
+				<%})%>
+			</div>
+	<%} else if(!post.categories.length) {%>
+			<div class="other-data tags">
 				<span class="tag"><i class="icons i-tags"></i>没有标签</span>
-<%}%>
+			</div>
+	<%}%>
+			<p class="date"><i class="icons i-date"></i><span title="<%-new Date(post.date)%>"><%-releaseDate%></span> </p>
 		</div>
-		<p class="date"><i class="icons i-date"></i><span title="<%-new Date(post.date)%>"><%-releaseDate%></span> </p>
+	<%
+		})
+	%>
 	</div>
-<%
-	})
-%>
+	<!-- 简介 -->
+	<div class="detail">
+		<div class="user-info">
+			<div class="avatar" style="background-image:url(<%-theme.avatar%>)">		</div>
+			<h1 class="author"><%-config.author%></h1>
+			<p class="subtitle"><%-config.subtitle%></p>
+			<div class="count-item">
+				<span class="count">
+					<i class="icons i-archives"></i>
+					<%-site.posts.length%>
+				</span>
+				<span class="count">
+					<i class="icons i-categories"></i>
+					<%-site.categories.length%>
+				</span>
+				<span class="count">
+					<i class="icons i-tags"></i>
+					<%-site.tags.length%>
+				</span>
+			</div>
+		</div>
+	</div>
 </div>

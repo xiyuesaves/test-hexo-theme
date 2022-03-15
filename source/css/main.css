@@ -1,5 +1,6 @@
 * {
-	color: #666666;
+	color: #3e3e5f;
+	color: #3e3e3e;
 	text-decoration: none;
 	box-sizing: border-box;
 	margin: 0;
@@ -266,8 +267,16 @@ body::-webkit-scrollbar {
 }
 
 #main-block .center-block {
-	width: 800px;
+	width: 1200px;
 	margin: 60px auto 0;
+}
+
+
+#main-block .center-block .detail{
+	width: 320px;
+	min-height: 100px;
+	height: auto;
+	max-height: 100%;
 }
 
 
