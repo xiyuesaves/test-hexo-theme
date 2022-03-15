@@ -1,8 +1,7 @@
 // 设置加载进度条颜色
 topbar.config({
 	barColors: {
-		'0': '#333333',
-		'1': '#333333'
+		'0': '#333333'
 	},
 	barThickness: 3
 });
@@ -19,6 +18,8 @@ const bodyHeight = {
 			window.addEventListener("mousewheel", event => {
 				if (this.hasScroll) {
 					this.wellFun(event);
+				} else {
+					event.preventDefault();
 				}
 			}, { passive: false });
 			M = null;
