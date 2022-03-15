@@ -282,7 +282,7 @@ body::-webkit-scrollbar {
 
 /* 代码块 */
 .post-content .highlight {
-	border-radius: 8px;
+	border-radius: 6px;
 	margin-left: 0;
 	margin-right: 0;
 	box-sizing: border-box;
@@ -291,6 +291,8 @@ body::-webkit-scrollbar {
 
 .post-content .highlight tr {
 	display: flex;
+	border-radius: 6px;
+	overflow: hidden;
 }
 
 .post-content .highlight tr pre {
@@ -301,6 +303,9 @@ body::-webkit-scrollbar {
 	user-select: none;
 	pointer-events: none;
 	padding: 8px 4px 0 6px;
+}
+
+.post-content .highlight .gutter .line{
 	color: #918175;
 }
 
@@ -308,8 +313,8 @@ body::-webkit-scrollbar {
 	padding: 8px;
 }
 
-.post-content .highlight table td {
-	max-width: calc(710px + 32px);
+.post-content .highlight table .code {
+	width: calc(710px + 87px);
 }
 
 /* 滚动条整体 */
