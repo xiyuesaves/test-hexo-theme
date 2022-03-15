@@ -177,6 +177,7 @@
 }
 .flex-item .detail .other-box .list-item .categories span{
 	font-size: 12px;
+	margin-left: 2px;
 }
 .flex-item .detail .other-box .list-item .categories .next-level{
 	margin-right: 4px;
