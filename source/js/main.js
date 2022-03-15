@@ -25,12 +25,17 @@ const bodyHeight = {
 			M = null;
 		}
 	},
-	release() {
+	release(lastTop = 0, tryNum = 0) {
 		if (!document.documentElement.scrollTop) {
 			document.body.removeAttribute("style");
 			this.hasScroll = true;
 		} else if (!this.hasScroll) {
-			setTimeout(() => { this.release() }, 100);
+			if (lastTop === document.documentElement.scrollTop && tryNum === 10) {
+				console.warn("纠正错误锁定滚轮");
+				tryNum = 0;
+				window.scrollTo(0, 0);
+			}
+			setTimeout(() => { this.release(document.documentElement.scrollTop, ++tryNum) }, 100);
 		}
 	}
 }
@@ -40,6 +45,7 @@ const pjax = new Pjax({
 	selectors: ["#top-nav .center-block", "#main-block .center-block", "#top-pic"],
 	cacheBust: false,
 	scrollTo: false,
+	scrollRestoration: false,
 	switches: {
 		"#main-block .center-block"(oldEl, newEl) { // 正文 正文加载完成后释放滚轮
 			let mainEl = document.querySelector("#main-block");
