@@ -9,49 +9,16 @@ topbar.config({
 // 切换顶部导航
 let fixelEl = document.querySelector("#fixel-nav")
 window.onscroll = function() {
-  //为了保证兼容性，这里取两个值，哪个有值取哪一个
-  //scrollTop就是触发滚轮事件时滚轮的高度
-  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  if(scrollTop > 40){
-  	fixelEl.style.transform = "translateY(0%)";
-  } else {
-  	fixelEl.style.transform = "translateY(-100%)";
-  }
-}
-
-// 滚动限制
-const bodyHeight = {
-	hasScroll: true,
-	wellFun: M,
-	fixed() {
-		document.body.style.height = `${document.body.scrollHeight}px`;
-		this.hasScroll = false;
-		if (M !== null) {
-			window.removeEventListener("mousewheel", M, { passive: false });
-			window.addEventListener("mousewheel", event => {
-				if (this.hasScroll) {
-					this.wellFun(event);
-				} else {
-					event.preventDefault();
-				}
-			}, { passive: false });
-			M = null;
-		}
-	},
-	release(lastTop = 0, tryNum = 0) {
-		if (!document.documentElement.scrollTop) {
-			document.body.removeAttribute("style");
-			this.hasScroll = true;
-		} else if (!this.hasScroll) {
-			if (lastTop === document.documentElement.scrollTop && tryNum === 10) {
-				console.warn("纠正错误锁定滚轮");
-				tryNum = 0;
-				window.scrollTo(0, 0);
-			}
-			setTimeout(() => { this.release(document.documentElement.scrollTop, ++tryNum) }, 100);
-		}
+	//为了保证兼容性，这里取两个值，哪个有值取哪一个
+	//scrollTop就是触发滚轮事件时滚轮的高度
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (scrollTop > 40) {
+		fixelEl.style.transform = "translateY(0%)";
+	} else {
+		fixelEl.style.transform = "translateY(-100%)";
 	}
 }
+
 
 // 启用pjax局部刷新
 const pjax = new Pjax({
@@ -66,8 +33,6 @@ const pjax = new Pjax({
 			mainEl.addEventListener("transitionend", () => {
 				mainEl.style.opacity = 1;
 				oldEl.outerHTML = newEl.outerHTML;
-				// 页面加载完成后释放滚动
-				bodyHeight.release();
 				this.onSwitch();
 			}, { once: true });
 		},
@@ -89,8 +54,13 @@ const pjax = new Pjax({
 		},
 		"#top-pic"(oldEl, newEl) { // banner图
 			let picEl = document.querySelector("#top-pic .bgi"),
-				bgiUrl = newEl.querySelector(".bgi").style.backgroundImage
-			changeTitle();
+				bgiUrl = newEl.querySelector(".bgi").style.backgroundImage,
+				picTitle = document.querySelector("#top-pic .top-title");
+			picTitle.style.opacity = 0;
+			picTitle.addEventListener("transitionend", () => {
+				picTitle.innerHTML = newEl.querySelector(".top-title").innerHTML;
+				picTitle.style.opacity = 1;
+			}, { once: true });
 			// 图片相同则不进行替换
 			if (picEl.style.backgroundImage !== bgiUrl) {
 				// 利用缓存机制让顶部图片加载完成后再进行替换
@@ -112,40 +82,23 @@ const pjax = new Pjax({
 			} else {
 				this.onSwitch();
 			}
-
-			function changeTitle() {
-				let picTitle = document.querySelector("#top-pic .top-title");
-				picTitle.style.opacity = 0;
-				picTitle.addEventListener("transitionend", () => {
-					picTitle.innerHTML = newEl.querySelector(".top-title").innerHTML;
-					picTitle.style.opacity = 1;
-				}, { once: true });
-			}
 		}
 	},
 	timeout: 5000
 });
 
-// 重写滚动函数,强制使用过渡效果
-let rewScroll = window.scrollTo;
-window.scrollTo = function(...options) {
-	rewScroll({
-		top: options[1],
-		left: options[0],
-		behavior: "smooth"
-	});
-}
-
 // 监听pjax事件展示加载进度条
 document.addEventListener('pjax:send', () => {
-	window.scrollTo(0, 0);
 	topbar.show();
-	bodyHeight.fixed();
 });
 document.addEventListener('pjax:complete', () => {
+	window.scrollTo({
+		top: 0,
+		left: 0,
+		behavior: "smooth"
+	});
 	showScroll();
 	topbar.hide();
-	bodyHeight.release();
 });
 
 function showScroll() {
