@@ -1,18 +1,16 @@
+<!-- 标签模块 -->
 <div class="other-box">
-			<h1 class="big-title">
-				<i class="icons i-tags"></i>
-				TAGS
-			</h1>
-			<div class="list-item">
-				<%
-					// 取出tag转换为标准数组
-					let tags = site.tags.map(el => el);
-					// 排序
-					tags.sort((ela,elb) => elb.length - ela.length)
-					// 输出
-					tags.forEach(el => {
-				%>
-					<a href="/<%-el.path%>" title="<%-el.length%> 篇" class="tag" style="font-size:<%-13+el.length > 46 ? 46 : el.length%>px"><%-el.name%></a>
-				<%})%>
-			</div>
-		</div>
+	<h1 class="big-title">
+		<i class="icons i-tags"></i>
+		TAGS
+	</h1>
+	<div class="list-item">
+		<%
+			let tags = site.tags.map(el => el);
+			tags.sort((ela,elb) => elb.length - ela.length)
+			tags.forEach(el => {
+		%>
+			<a href="/<%-el.path%>" title="<%-el.length%> 篇" class="tag" style="font-size:<%-13+ (el.length > 46 ? 46 : el.length)%>px"><%-el.name%></a>
+		<%})%>
+	</div>
+</div>
