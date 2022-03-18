@@ -9,21 +9,22 @@
 
 body {
 	margin: 0;
-	/*padding-top: 40px;*/
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	min-height: 100vh;
-	/*overflow: hidden;*/
 	padding-bottom: 1px;
 	background-attachment: fixed;
 	background-color: #f5f8fa;
-	/*background-color: #f0f0f0;*/
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE 10+ */
 }
 
+/* 隐藏滚动条 */
 body::-webkit-scrollbar {
 	width: 0 !important;
 }
+
 
 #fixel-nav {
 	position: fixed;
