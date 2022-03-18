@@ -7,7 +7,7 @@ topbar.config({
 });
 
 // 切换顶部导航
-let fixelEl = document.querySelector("#fixel-nav")
+let fixelEl = document.querySelector("#fixel-nav");
 window.onscroll = function() {
 	//为了保证兼容性，这里取两个值，哪个有值取哪一个
 	//scrollTop就是触发滚轮事件时滚轮的高度
@@ -63,7 +63,7 @@ const pjax = new Pjax({
 			}, { once: true });
 			// 图片相同则不进行替换
 			if (picEl.style.backgroundImage !== bgiUrl) {
-				// 利用缓存机制让顶部图片加载完成后再进行替换
+				// 利用缓存机制让顶部图片加载完成后再执行进行替换
 				let newPic = document.createElement("div"),
 					picUrl = bgiUrl.replace(/^url\("/, "").replace(/"\)$/, ""),
 					newImg = document.createElement("img");
