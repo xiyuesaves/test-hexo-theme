@@ -12,7 +12,7 @@
 					// 输出
 					tags.forEach(el => {
 				%>
-					<a href="/<%-el.path%>" title="<%-el.length%> 篇" class="tag" style="font-size:<%-13+el.length%>px"><%-el.name%></a>
+					<a href="/<%-el.path%>" title="<%-el.length%> 篇" class="tag" style="font-size:<%-13+el.length > 46 ? 46 : el.length%>px"><%-el.name%></a>
 				<%})%>
 			</div>
 		</div>
