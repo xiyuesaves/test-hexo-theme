@@ -22,13 +22,13 @@
 			site.categories.forEach(el => {
 			showIcon(el.slug);
 		%>
-			<a href="/<%-el.path%>" style="padding-left:<%-showIcons ? 32 * (level - 2) + 10 : 30 * (level - 1)%>px" class="categories">
+			<p style="padding-left:<%-showIcons ? 32 * (level - 2) + 10 : 30 * (level - 1)%>px" class="categories">
 				<%if(showIcons){%>
 					<i class="icons next-level i-next-level"></i>
 				<%}%>
-				<%-el.name%>
+				<a href="/<%-el.path%>"><%-el.name%></a>
 				<span>(<%-el.posts.length%>)</span>
-			</a>
+			</p>
 		<%})%>
 	</div>
 </div>
