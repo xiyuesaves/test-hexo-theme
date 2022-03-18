@@ -67,6 +67,7 @@
 %>
 
 <div id="top-pic">
+	<!-- 顶部导航 -->
 	<div id="top-nav" class="head-nav">
 		<div class="center-block">
 			<a class="about"  href="/about"><%-config.author%></a>
@@ -81,46 +82,47 @@
 			</div>
 		</div>
 	</div>
+	<!-- 标题信息 -->
 	<div class="top-title">
 		<div class="center-box">
-<%if(!isPost){%>
-			<div class="big-title-item">
-				<h1 class="big-title"><%-title%></h1>
-	    	<p class="sm-title"><%-subtitle %></p>
-			</div>
-<%
-	}else{
-	let releaseDate = new Date(page.date).toLocaleString("zh-CN",{ year:'numeric', month:'long', day:'numeric'});
-%>
-			<div class="detail-item">
-				<h1 class="big-title"><%-title%></h1>
-				<p class="author"><%-config.author%> 发布于 <span title="<%-new Date(page.date)%>"><%-releaseDate%></span> </p>
-<%if(page.categories.length){%>
-				<div class="other-data categories">
-					<i class="icons i-categories"></i>
-					<%page.categories.forEach((el, index) => {%>
-						<%if(index){%>
-							<span class="delimiter"></span>
-						<%}%>
-						<a class="category" href="/<%-el.path%>"><%-el.name%></a>
-					<%})%>
+			<%if(!isPost){%>
+				<div class="big-title-item">
+					<h1 class="big-title"><%-title%></h1>
+	    		<p class="sm-title"><%-subtitle %></p>
 				</div>
-<%}%>
-<%if(page.tags.length){%>
-				<div class="other-data tags">
-					<%page.tags.forEach(el => {%>
-						<a class="tag" href="/<%-el.path%>"><i class="icons i-tags"></i><%-el.name%></a>
-					<%})%>
+			<%
+				}else{
+					let releaseDate = new Date(page.date).toLocaleString("zh-CN",{ year:'numeric', month:'long', day:'numeric'});
+			%>
+				<div class="detail-item">
+					<h1 class="big-title"><%-title%></h1>
+					<p class="author"><%-config.author%> 发布于 <span title="<%-new Date(page.date)%>"><%-releaseDate%></span> </p>
+					<%if(page.categories.length){%>
+						<div class="other-data categories">
+							<i class="icons i-categories"></i>
+							<%page.categories.forEach((el, index) => {%>
+								<%if(index){%>
+									<span class="delimiter"></span>
+								<%}%>
+								<a class="category" href="/<%-el.path%>"><%-el.name%></a>
+							<%})%>
+						</div>
+					<%}%>
+					<%if(page.tags.length){%>
+						<div class="other-data tags">
+							<%page.tags.forEach(el => {%>
+								<a class="tag" href="/<%-el.path%>"><i class="icons i-tags"></i><%-el.name%></a>
+							<%})%>
+						</div>
+					<%}%>
+					<%if(page.picture && page.picture.url){%>
+						<div class="other-data pic">
+							<i class="icons i-pic"></i>
+							<a href="<%-page.picture.url%>"><%-page.picture.name ? page.picture.name : page.picture.url%></a>
+						</div>
+					<%}%>
 				</div>
-<%}%>
-<%if(page.picture && page.picture.url){%>
-				<div class="other-data pic">
-					<i class="icons i-pic"></i>
-					<a href="<%-page.picture.url%>"><%-page.picture.name ? page.picture.name : page.picture.url%></a>
-				</div>
-<%}%>
-			</div>
-<%}%>
+			<%}%>
 		</div>
 	</div>
 	<div class="bgi <%-isPost ? "filter" : ""%> shadow-blur" style="background-image:url(<%-bgPic%>)"></div>

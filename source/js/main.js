@@ -22,7 +22,7 @@ window.onscroll = function() {
 
 // 启用pjax局部刷新
 const pjax = new Pjax({
-	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic"],
+	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
 	cacheBust: false,
 	scrollTo: false,
 	scrollRestoration: false,
@@ -52,29 +52,23 @@ const pjax = new Pjax({
 			}
 			this.onSwitch();
 		},
-		"#top-pic"(oldEl, newEl) { // banner图
-			let picEl = document.querySelector("#top-pic .bgi"),
-				bgiUrl = newEl.querySelector(".bgi").style.backgroundImage,
-				picTitle = document.querySelector("#top-pic .top-title");
-			picTitle.style.opacity = 0;
-			picTitle.addEventListener("transitionend", () => {
-				picTitle.innerHTML = newEl.querySelector(".top-title").innerHTML;
-				picTitle.style.opacity = 1;
-			}, { once: true });
+		"#top-pic .bgi"(oldEl, newEl) { // banner图
+			let oldUrl = oldEl.style.backgroundImage,
+			newUrl = newEl.style.backgroundImage;
 			// 图片相同则不进行替换
-			if (picEl.style.backgroundImage !== bgiUrl) {
+			if (oldUrl !== newUrl) {
 				// 利用缓存机制让顶部图片加载完成后再执行进行替换
 				let newPic = document.createElement("div"),
-					picUrl = bgiUrl.replace(/^url\("/, "").replace(/"\)$/, ""),
+					picUrl = newUrl.replace(/^url\("/, "").replace(/"\)$/, ""),
 					newImg = document.createElement("img");
 				newImg.src = picUrl;
 				newImg.onload = () => {
 					newPic.className = "bgi";
-					newPic.style.backgroundImage = bgiUrl;
-					picEl.parentNode.appendChild(newPic);
-					picEl.className += " hidden";
-					picEl.addEventListener("transitionend", () => {
-						picEl.remove();
+					newPic.style.backgroundImage = newUrl;
+					oldEl.parentNode.appendChild(newPic);
+					oldEl.className += " hidden";
+					oldEl.addEventListener("transitionend", () => {
+						oldEl.remove();
 						newPic.className += " shadow-blur";
 						this.onSwitch();
 					}, { once: true });
@@ -82,6 +76,15 @@ const pjax = new Pjax({
 			} else {
 				this.onSwitch();
 			}
+		},
+		"#top-pic .center-box"(oldEl, newEl) { // title信息
+			let parentEl = oldEl.parentNode;
+			parentEl.style.opacity = 0;
+			parentEl.addEventListener("transitionend", () => {
+				oldEl.outerHTML = newEl.outerHTML;
+				parentEl.style.opacity = 1;
+				this.onSwitch();
+			}, { once: true });
 		}
 	},
 	timeout: 5000
