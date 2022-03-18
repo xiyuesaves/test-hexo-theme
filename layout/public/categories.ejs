@@ -1,0 +1,33 @@
+<div class="other-box">
+	<h1 class="big-title">
+		<i class="icons i-categories"></i>
+		CATEGORYS
+	</h1>
+	<div class="list-item">
+		<%
+			let categories = site.categories.map(el => el),
+				level = 1,
+				showIcons = false;
+			function showIcon(slug){
+				let thisLevel = slug.split("/").length
+				if(thisLevel > level){
+					level = thisLevel;
+					showIcons = true;
+				} else {
+					level = thisLevel;
+					showIcons = false;
+				};
+			}
+			site.categories.forEach(el => {
+			showIcon(el.slug);
+		%>
+			<a href="/<%-el.path%>" style="padding-left:<%-showIcons ? 32 * (level - 2) + 10 : 30 * (level - 1)%>px" class="categories">
+				<%if(showIcons){%>
+					<i class="icons next-level i-next-level"></i>
+				<%}%>
+				<%-el.name%>
+				<span>(<%-el.posts.length%>)</span>
+			</a>
+		<%})%>
+	</div>
+</div>

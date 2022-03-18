@@ -44,77 +44,10 @@
 	<!-- 简介 -->
 	<div class="detail">
 		<!-- 用户信息 -->
-		<div class="user-info">
-			<div class="avatar" style="background-image:url(<%-theme.avatar%>)">		</div>
-			<h1 class="author"><%-config.author%></h1>
-			<p class="subtitle"><%-config.subtitle%></p>
-			<div class="count-item">
-				<span class="count">
-					<i class="icons i-archives"></i>
-					<%-site.posts.length%>
-				</span>
-				<span class="count">
-					<i class="icons i-categories"></i>
-					<%-site.categories.length%>
-				</span>
-				<span class="count">
-					<i class="icons i-tags"></i>
-					<%-site.tags.length%>
-				</span>
-			</div>
-		</div>
+		<%-include("public/userInfo.ejs")%>
 		<!-- tag -->
-		<div class="other-box">
-			<h1 class="big-title">
-				<i class="icons i-tags"></i>
-				TAGS
-			</h1>
-			<div class="list-item">
-				<%
-					// 取出tag转换为标准数组
-					let tags = site.tags.map(el => el);
-					// 排序
-					tags.sort((ela,elb) => elb.length - ela.length)
-					// 输出
-					tags.forEach(el => {
-				%>
-					<a href="/<%-el.path%>" title="<%-el.length%> 篇" class="tag" style="font-size:<%-13+el.length%>px"><%-el.name%></a>
-				<%})%>
-			</div>
-		</div>
-		<!-- tag -->
-		<div class="other-box tags">
-			<h1 class="big-title">
-				<i class="icons i-categories"></i>
-				CATEGORYS
-			</h1>
-			<div class="list-item">
-				<%
-					let categories = site.categories.map(el => el),
-						level = 1,
-						showIcons = false;
-					function showIcon(slug){
-						let thisLevel = slug.split("/").length
-						if(thisLevel > level){
-							level = thisLevel;
-							showIcons = true;
-						} else {
-							level = thisLevel;
-							showIcons = false;
-						};
-					}
-					site.categories.forEach(el => {
-					showIcon(el.slug);
-				%>
-					<a href="/<%-el.path%>" style="padding-left:<%-showIcons ? 32 * (level - 2) + 10 : 30 * (level - 1)%>px" class="categories">
-						<%if(showIcons){%>
-							<i class="icons next-level i-next-level"></i>
-						<%}%>
-						<%-el.name%>
-						<span>(<%-el.posts.length%>)</span>
-					</a>
-				<%})%>
-			</div>
-		</div>
+		<%-include("public/tag.ejs")%>
+		<!-- categories -->
+		<%-include("public/categories.ejs")%>
 	</div>
 </div>
