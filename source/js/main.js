@@ -8,7 +8,7 @@ topbar.config({
 
 // 切换顶部导航
 let fixelEl = document.querySelector("#fixel-nav");
-window.onscroll = function() {
+document.addEventListener("scroll", function() {
 	//为了保证兼容性，这里取两个值，哪个有值取哪一个
 	//scrollTop就是触发滚轮事件时滚轮的高度
 	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -17,7 +17,8 @@ window.onscroll = function() {
 	} else {
 		fixelEl.style.transform = "translateY(-100%)";
 	}
-}
+})
+
 
 // 启用pjax局部刷新
 const pjax = new Pjax({
