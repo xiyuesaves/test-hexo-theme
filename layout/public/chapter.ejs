@@ -1,0 +1,39 @@
+<%
+	let mdTocList = page.raw.match(/##+\s.+/g) || [],
+		h2List = h3List = [];
+		mdTocList.forEach(el => {
+			if (el.match(/^#{2}\s/)) {
+				h3List = new Array();
+				h2List.push({node: el.replace(/#+\s/,""),children: h3List})
+			}
+			if (el.match(/^#{3}\s/)) {
+				h3List.push({node: el.replace(/#+\s/,"")})
+			}
+		})
+	if(h2List.length){
+%>
+<div class="sidebar toc">
+	<h1 class="big-title">
+		<i class="icons i-chapter"></i>
+		TOC
+	</h1>
+	<div class="list-item toc">
+		<ul>
+			<%h2List.forEach(el => {%>
+				<li>
+					<p><%-el.node%></p>
+					<%if(el.children){%>
+						<ul>
+							<%el.children.forEach(el => {%>
+								<li>
+									<p><%-el.node%></p>
+								</li>
+							<%})%>
+						</ul>
+					<%}%>
+				</li>
+			<%})%>
+		</ul>
+	</div>
+</div>
+<%}%>

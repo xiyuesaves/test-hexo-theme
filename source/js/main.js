@@ -19,13 +19,12 @@ window.onscroll = function() {
 	}
 }
 
-
 // 启用pjax局部刷新
 const pjax = new Pjax({
 	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
-	cacheBust: false,
-	scrollTo: false,
-	scrollRestoration: false,
+	cacheBust: false, // 阻止携带时间戳
+	scrollTo: false, // 阻止滚动到指定位置
+	scrollRestoration: false, // 阻止切换页面时回到上次位置
 	switches: {
 		"#main-block .center-block"(oldEl, newEl) { // 正文 正文加载完成后释放滚轮
 			let mainEl = document.querySelector("#main-block");
@@ -54,7 +53,7 @@ const pjax = new Pjax({
 		},
 		"#top-pic .bgi"(oldEl, newEl) { // banner图
 			let oldUrl = oldEl.style.backgroundImage,
-			newUrl = newEl.style.backgroundImage;
+				newUrl = newEl.style.backgroundImage;
 			// 图片相同则不进行替换
 			if (oldUrl !== newUrl) {
 				// 利用缓存机制让顶部图片加载完成后再执行进行替换
@@ -87,7 +86,7 @@ const pjax = new Pjax({
 			}, { once: true });
 		}
 	},
-	timeout: 5000
+	timeout: 5000 // 请求超时时长
 });
 
 // 监听pjax事件展示加载进度条
