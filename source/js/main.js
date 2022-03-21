@@ -6,19 +6,6 @@ topbar.config({
 	barThickness: 3
 });
 
-// 切换顶部导航
-let fixelEl = document.querySelector("#fixel-nav");
-document.addEventListener("scroll", function() {
-	//为了保证兼容性，这里取两个值，哪个有值取哪一个
-	//scrollTop就是触发滚轮事件时滚轮的高度
-	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-	if (scrollTop > 40) {
-		fixelEl.style.transform = "translateY(0%)";
-	} else {
-		fixelEl.style.transform = "translateY(-100%)";
-	}
-})
-
 // 启用pjax局部刷新
 const pjax = new Pjax({
 	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
@@ -104,11 +91,104 @@ document.addEventListener('pjax:complete', () => {
 	topbar.hide();
 });
 
+// 判断是否展示滚动条
+let count = 0,
+	doc = document,
+	box = doc.querySelector('body'),
+	content = doc.querySelector('#main'),
+	scrollBar = doc.querySelector('.scroll-bar'),
+	scroll = doc.querySelector('.scroll-bar .scroll-block'),
+	scrollBarHeight = scrollBar.clientHeight, // .scroll-bar 可视区域高度
+	contentSH = content.scrollHeight, // .box-content 高度，包括被卷入的高度
+	contentCH = scrollBarHeight, // .box-content 可视区域高度
+	multiple = contentSH / contentCH, // 滚动条移动倍数
+	num = contentCH * (contentCH / contentSH); // 计算滚动条内可滚动部分的长度
+
+showScroll();
 function showScroll() {
 	if (document.body.scrollHeight > window.innerHeight) {
-		console.log("展示滚动条");
+		document.querySelector(".scroll-bar").className = "scroll-bar";
+		let scrollBlockHeight = window.innerHeight * (window.innerHeight / document.body.scrollHeight);
+		document.querySelector(".scroll-bar .scroll-block").style.height = `${scrollBlockHeight}px`;
+		changeScrollBarSize();
 	} else {
-		console.log("移除滚动条");
+		document.querySelector(".scroll-bar").className = "scroll-bar hiden";
+	}
+}
+
+function changeScrollBarSize() {
+	scrollBarHeight = scrollBar.clientHeight; // .scroll-bar 可视区域高度
+	contentSH = content.scrollHeight; // .box-content 高度，包括被卷入的高度
+	contentCH = scrollBarHeight; // .box-content 可视区域高度
+	multiple = contentSH / contentCH; // 滚动条移动倍数
+	num = contentCH * (contentCH / contentSH); // 计算滚动条内可滚动部分的长度
+}
+
+customScrollBar();
+function customScrollBar() {
+	// setTimeout(function () {
+		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		console.log("这主题开发过程中遇到一个很奇怪的bug,侧边的滑块会在未知情况下超出限制范围,但是当我开始调试时又完全无法复现了...")
+		console.log(scrollTop,window.innerHeight,scrollTop / window.innerHeight)
+		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
+	// })
+	if (contentCH >= contentSH) {
+		scrollBar.className = "scroll-bar hiden";
+	} else if (!scrollBar.className.includes("hiden")) {
+		scrollBar.className = "scroll-bar";
+	}
+
+	document.addEventListener('scroll', function() {
+		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
+	});
+
+
+	function mouseEvents(e) {
+		window.scrollTo({
+			top: ((e.clientY - 0) * multiple) - count,
+			left: 0
+		});
+	}
+
+	scroll.onmousedown = function(e) {
+		doc.onselectstart = function() {
+			return false;
+		};
+		count = e.offsetY * multiple;
+		box.addEventListener('mousemove', mouseEvents);
+		scroll.className = "scroll-block active"
+	};
+
+	box.onmouseup = function() {
+		this.removeEventListener('mousemove', mouseEvents);
+		doc.onselectstart = function() {
+			return true;
+		}
+		scroll.className = "scroll-block"
+	};
+
+	box.onmouseleave = function() {
+		this.removeEventListener('mousemove', mouseEvents);
+		doc.onselectstart = function() {
+			return true;
+		}
+		scroll.className = "scroll-block"
+	}
+}
+
+// 切换顶部导航
+let fixelEl = document.querySelector("#fixel-nav");
+showFixelNav();
+document.addEventListener("scroll", function() {
+	showFixelNav();
+})
+function showFixelNav() {
+	let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (scrollTop > 40) {
+		fixelEl.style.transform = "translateY(0%)";
+	} else {
+		fixelEl.style.transform = "translateY(-100%)";
 	}
 }
 
@@ -126,7 +206,7 @@ function initToc() {
 	}
 }
 
-// 目录上色
+// 激活目录
 document.addEventListener("scroll", function() {
 	if (showToc) {
 		postToc.forEach((el, index) => {
@@ -147,11 +227,10 @@ document.addEventListener("scroll", function() {
 
 // 方法来自 https://github.com/febobo/web-interview/issues/84
 function isInViewPortOfOne(el) {
-	// viewPortHeight 兼容所有浏览器写法
 	const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	const offsetTop = el.offsetTop;
 	const scrollTop = document.documentElement.scrollTop;
-	const top = offsetTop - scrollTop + (viewPortHeight / 3) * 2; // 增加40像素偏移,让标题可读后再判定为进入页面
+	const top = offsetTop - scrollTop + (viewPortHeight / 3) * 2; // 增加像素偏移,让标题居中偏上后再激活
 	return top <= viewPortHeight;
 }
 

@@ -5,6 +5,10 @@
 	padding: 0;
 }
 
+a {
+	color: #3e3e3e;
+}
+
 body {
 	margin: 0;
 	background-size: cover;
@@ -306,6 +310,14 @@ body::-webkit-scrollbar {
 	margin: 40px auto 0;
 }
 
+.post-content p>code {
+	background-color: #f6f8fa;
+	margin: 0 2px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	padding: 2px 3px;
+	border-radius: 4px;
+}
+
 /* 代码块 */
 .post-content .highlight {
 	border-radius: 6px;
@@ -313,6 +325,7 @@ body::-webkit-scrollbar {
 	margin-right: 0;
 	box-sizing: border-box;
 	background-color: #1c1b19;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .post-content .highlight tr {
@@ -383,8 +396,6 @@ body::-webkit-scrollbar {
 
 
 /* 侧边栏模块样式 */
-
-
 
 #main .center-block .sidebar-item {
 	position: sticky;
@@ -516,4 +527,50 @@ body::-webkit-scrollbar {
 
 #main .center-block .sidebar-item .toc ul ul {
 	padding-left: 20px;
+}
+
+/* 滚动条 */
+.scroll-bar {
+	width: 16px;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.2);
+	z-index: 800;
+	box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.05);
+	backdrop-filter: blur(12px);
+	transition: 300ms;
+}
+
+.scroll-bar.hiden {
+	transform: translateX(100%);
+	box-shadow: none;
+}
+
+.scroll-bar .scroll-block {
+	width: 100%;
+	transform: translateY(0px);
+	height: 100px;
+	transition: height 300ms;
+	padding: 2px;
+}
+
+.scroll-bar .scroll-block.active:after {
+	background-color: #ffffff;
+}
+
+.scroll-bar .scroll-block::after{
+	content: "";
+	border-radius: 4px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(12px);
+	background-color: rgba(255, 255, 255, 0.8);
+	transition: background-color 300ms;
+}
+
+.scroll-bar .scroll-block:hover:after {
+	background-color: #ffffff;
 }
