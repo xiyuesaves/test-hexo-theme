@@ -1,6 +1,4 @@
 * {
-	color: #3e3e5f;
-	color: #3e3e3e;
 	text-decoration: none;
 	box-sizing: border-box;
 	margin: 0;
@@ -15,6 +13,7 @@ body {
 	min-height: 100vh;
 	padding-bottom: 1px;
 	background-attachment: fixed;
+	color: #3e3e3e;
 	background-color: #f5f8fa;
 	scrollbar-width: none;
 	/* Firefox */
