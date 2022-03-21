@@ -1,13 +1,14 @@
 <%
-	let mdTocList = page.raw.match(/#{2,}\s.+/g) || [],
+	let mdTocList = page.raw.match(/(\r\n|\r|\n|^)#+\s.+/g) || [],
 		h2List = h3List = [];
 		mdTocList.forEach(el => {
-			if (el.match(/^#{2}\s/)) {
+			let newEl = el.replace(/\s/,"");
+			if (newEl.match(/^#{2}\s/) || newEl.match(/^#\s/)) {
 				h3List = new Array();
-				h2List.push({node: el.replace(/#+\s/,""),children: h3List})
+				h2List.push({node: newEl.replace(/#+\s/,""),children: h3List})
 			}
-			if (el.match(/^#{3}\s/)) {
-				h3List.push({node: el.replace(/#+\s/,"")})
+			if (newEl.match(/^#{3}\s/)) {
+				h3List.push({node: newEl.replace(/#+\s/,"")})
 			}
 		})
 	if(h2List.length){
@@ -21,7 +22,7 @@
 		<ul>
 			<%h2List.forEach(el => {%>
 				<li>
-					<p class="active" onclick="goto('<%-el.node %>')"><%-el.node%></p>
+					<p onclick="goto('<%-el.node %>')"><%-el.node%></p>
 					<%if(el.children){%>
 						<ul>
 							<%el.children.forEach(el => {%>
@@ -36,10 +37,4 @@
 		</ul>
 	</div>
 </div>
-<script type="text/javascript">
-	let postToc = document.querySelectorAll(".toc ul p");
-	document.addEventListener("scroll", function () {
-		console.log("a")
-	})
-</script>
 <%}%>
