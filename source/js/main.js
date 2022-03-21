@@ -19,7 +19,6 @@ document.addEventListener("scroll", function() {
 	}
 })
 
-
 // 启用pjax局部刷新
 const pjax = new Pjax({
 	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
@@ -101,6 +100,7 @@ document.addEventListener('pjax:complete', () => {
 		behavior: "smooth"
 	});
 	showScroll();
+	initToc();
 	topbar.hide();
 });
 
@@ -110,4 +110,58 @@ function showScroll() {
 	} else {
 		console.log("移除滚动条");
 	}
+}
+
+// 目录刷新
+let postToc = [],
+	showToc = false;
+initToc();
+
+function initToc() {
+	if (document.querySelector(".toc")) {
+		showToc = true;
+		postToc = document.querySelectorAll(".toc ul p");
+	} else {
+		showToc = false;
+	}
+}
+
+// 目录上色
+document.addEventListener("scroll", function() {
+	if (showToc) {
+		postToc.forEach((el, index) => {
+			let realEl = document.querySelector(`[title="${el.innerText}"]`);
+			if (realEl && isInViewPortOfOne(realEl)) {
+				let nextEl = postToc[index + 1] ? document.querySelector(`[title="${postToc[index + 1].innerText}"]`) : null;
+				if (nextEl && isInViewPortOfOne(nextEl)) {
+					el.className = " read";
+				} else {
+					el.className = " active";
+				}
+			} else {
+				el.className = "";
+			}
+		})
+	}
+})
+
+// 方法来自 https://github.com/febobo/web-interview/issues/84
+function isInViewPortOfOne(el) {
+	// viewPortHeight 兼容所有浏览器写法
+	const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	const offsetTop = el.offsetTop;
+	const scrollTop = document.documentElement.scrollTop;
+	const top = offsetTop - scrollTop + (viewPortHeight / 3) * 2; // 增加40像素偏移,让标题可读后再判定为进入页面
+	return top <= viewPortHeight;
+}
+
+// 跳转到指定目录
+function goto(title) {
+	const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+		elTop = document.querySelector(`[title="${title}"]`).offsetTop - viewPortHeight / 3;
+	window.scrollTo({
+		top: elTop,
+		left: 0,
+		behavior: "smooth"
+	});
 }
