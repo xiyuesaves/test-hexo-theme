@@ -387,6 +387,8 @@ body::-webkit-scrollbar {
 
 
 #main .center-block .sidebar-item {
+	position: sticky;
+	top: 68px;
 	width: 320px;
 	min-height: 100px;
 	height: auto;
@@ -495,21 +497,23 @@ body::-webkit-scrollbar {
 	height: auto;
 }
 
-#main .center-block .sidebar-item .toc .is-read{
-	color: #999999;
+#main .center-block .sidebar-item .toc .read {
+	/*color: #cccccc;*/
 }
 
-#main .center-block .sidebar-item .toc .active{
+#main .center-block .sidebar-item .toc .active {
 	color: #0969da;
 }
 
-#main .center-block .sidebar-item .toc ul{
+#main .center-block .sidebar-item .toc ul {
 	list-style: none;
 }
-#main .center-block .sidebar-item .toc ul p{
+
+#main .center-block .sidebar-item .toc ul p {
 	cursor: pointer;
 	margin-bottom: 8px;
 }
-#main .center-block .sidebar-item .toc ul ul{
+
+#main .center-block .sidebar-item .toc ul ul {
 	padding-left: 20px;
 }
