@@ -1,9 +1,20 @@
-<%- css('css/page.css') %>
 <%
 	let total = page.total,
 		current = page.current,
 		prev = page.prev,
-		next = page.next
+		next = page.next,
+		maxShowPage = theme.page.maxShowPage,
+		startPage = (() => {
+			let starPage = current - Math.floor(maxShowPage/2);
+			if (starPage + maxShowPage > total) {
+				return total - maxShowPage;
+			}
+			if (starPage <= 0) {
+				return 1;
+			}
+			return starPage;
+		})(),
+		forLoop = total > maxShowPage ? (startPage + maxShowPage) : total;
 %>
 <ul class="pages">
 	<li>
@@ -12,10 +23,34 @@
 		</a>
 	</li>
 	<%
-		for (let i = 1; i <= total; i++) {
+		if ((startPage - 1) > 1) {
+	%>
+	<li>
+		<a href="/" class="">1</a>
+	</li>
+	<li>
+		<a href="" class="ellipsis">...</a>
+	</li>
+	<%
+		}
+		for (let i = startPage; i <= forLoop; i++) {
 	%>
 	<li>
 		<a href="<%-i === 1 ? '/' : `/page/${i}/`%>" class="<%-i === current ? 'on-choose' : ''%>"><%-i%></a>
+	</li>
+	<%
+		}
+		if (forLoop < total) {
+			if((forLoop+1) < total){
+	%>
+	<li>
+		<a href="" class="ellipsis">...</a>
+	</li>
+		<%
+			}
+		%>
+	<li>
+		<a href="<%-total === 1 ? '/' : `/page/${total}/`%>" class="<%-total === current ? 'on-choose' : ''%>"><%-total%></a>
 	</li>
 	<%
 		}

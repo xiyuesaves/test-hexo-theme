@@ -45,3 +45,7 @@
 .pages .none-page i {
 	color: #dddddd;
 }
+.pages .ellipsis{
+	pointer-events: none;
+	margin: 0;
+}
