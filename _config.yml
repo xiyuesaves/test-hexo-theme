@@ -20,6 +20,8 @@ nav:
       icon: icon-yemian-copy-copy
       url: /about
 
+page:
+  maxShowPage: 5
 
 # 背景图
 backgroundImage: /img/bg.jpg
