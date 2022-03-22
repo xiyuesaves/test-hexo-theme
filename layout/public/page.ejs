@@ -1,0 +1,28 @@
+<%- css('css/page.css') %>
+<%
+	let total = page.total,
+		current = page.current,
+		prev = page.prev,
+		next = page.next
+%>
+<ul class="pages">
+	<li>
+		<a href="<%-prev === 1 ? '/' : `/page/${prev}/`%>" class="<%-prev !== 0 ? '' : 'none-page'%> prev-page">
+			<i class="icons i-next-page"></i>
+		</a>
+	</li>
+	<%
+		for (let i = 1; i <= total; i++) {
+	%>
+	<li>
+		<a href="<%-i === 1 ? '/' : `/page/${i}/`%>" class="<%-i === current ? 'on-choose' : ''%>"><%-i%></a>
+	</li>
+	<%
+		}
+	%>
+	<li>
+		<a href="<%-next === 0 ? '' : `/page/${next}/`%>" class="<%-next !== 0 ? '' : 'none-page'%> next-page">
+			<i class="icons i-next-page"></i>
+		</a>
+	</li>
+</ul>
