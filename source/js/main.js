@@ -105,12 +105,17 @@ let count = 0,
 	num = contentCH * (contentCH / contentSH); // 计算滚动条内可滚动部分的长度
 
 showScroll();
+
 function showScroll() {
 	if (document.body.scrollHeight > window.innerHeight) {
-		document.querySelector(".scroll-bar").className = "scroll-bar";
 		let scrollBlockHeight = window.innerHeight * (window.innerHeight / document.body.scrollHeight);
 		document.querySelector(".scroll-bar .scroll-block").style.height = `${scrollBlockHeight}px`;
 		changeScrollBarSize();
+		if (document.querySelector(".scroll-bar").className.includes("hiden")) {
+			document.querySelector(".scroll-bar .scroll-block").addEventListener("transitionend", function() {
+				document.querySelector(".scroll-bar").className = "scroll-bar";
+			}, { once: true })
+		}
 	} else {
 		document.querySelector(".scroll-bar").className = "scroll-bar hiden";
 	}
@@ -125,13 +130,12 @@ function changeScrollBarSize() {
 }
 
 customScrollBar();
+
 function customScrollBar() {
-	// setTimeout(function () {
-		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		console.log("这主题开发过程中遇到一个很奇怪的bug,侧边的滑块会在未知情况下超出限制范围,但是当我开始调试时又完全无法复现了...")
-		console.log(scrollTop,window.innerHeight,scrollTop / window.innerHeight)
-		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
-	// })
+	// 这主题开发过程中遇到一个很奇怪的bug,侧边的滑块会在未知情况下超出限制范围,但是当我开始调试时又完全无法复现了...
+	let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	console.log(scrollTop, window.innerHeight, scrollTop / window.innerHeight)
+	scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
 	if (contentCH >= contentSH) {
 		scrollBar.className = "scroll-bar hiden";
 	} else if (!scrollBar.className.includes("hiden")) {
@@ -157,7 +161,7 @@ function customScrollBar() {
 		};
 		count = e.offsetY * multiple;
 		box.addEventListener('mousemove', mouseEvents);
-		scroll.className = "scroll-block active"
+		scrollBar.className = "scroll-bar active"
 	};
 
 	box.onmouseup = function() {
@@ -165,7 +169,7 @@ function customScrollBar() {
 		doc.onselectstart = function() {
 			return true;
 		}
-		scroll.className = "scroll-block"
+		scrollBar.className = "scroll-bar"
 	};
 
 	box.onmouseleave = function() {
@@ -173,7 +177,7 @@ function customScrollBar() {
 		doc.onselectstart = function() {
 			return true;
 		}
-		scroll.className = "scroll-block"
+		scrollBar.className = "scroll-bar"
 	}
 }
 
@@ -183,6 +187,7 @@ showFixelNav();
 document.addEventListener("scroll", function() {
 	showFixelNav();
 })
+
 function showFixelNav() {
 	let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 	if (scrollTop > 40) {
@@ -225,7 +230,6 @@ document.addEventListener("scroll", function() {
 	}
 })
 
-// 方法来自 https://github.com/febobo/web-interview/issues/84
 function isInViewPortOfOne(el) {
 	const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	const offsetTop = el.offsetTop;
