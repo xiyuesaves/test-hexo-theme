@@ -6,11 +6,11 @@
 		maxShowPage = theme.page.maxShowPage - 1,
 		startPage = (() => {
 			let starPage = current - Math.floor(maxShowPage/2);
-			if (starPage + maxShowPage > total) {
-				return total - maxShowPage;
-			}
 			if (starPage <= 0) {
 				return 1;
+			}
+			if (starPage + maxShowPage > total) {
+				return total - maxShowPage;
 			}
 			return starPage;
 		})(),
@@ -27,6 +27,7 @@
 			--forLoop;
 		}
 		console.log(startPage,forLoop,theme.page.maxShowPage,total)
+		if(total > 1){
 %>
 <ul class="pages">
 	<li>
@@ -69,3 +70,4 @@
 		</a>
 	</li>
 </ul>
+<%}%>
