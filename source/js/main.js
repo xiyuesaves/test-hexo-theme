@@ -13,7 +13,7 @@ const pjax = new Pjax({
 	scrollTo: false, // 阻止滚动到指定位置
 	scrollRestoration: false, // 阻止切换页面时回到上次位置
 	switches: {
-		"#main-block .center-block"(oldEl, newEl) { // 正文 正文加载完成后释放滚轮
+		"#main-block .center-block"(oldEl, newEl) { // 正文
 			let mainEl = document.querySelector("#main-block");
 			mainEl.style.opacity = 0;
 			mainEl.addEventListener("transitionend", () => {
@@ -107,17 +107,21 @@ let count = 0,
 showScroll();
 
 function showScroll() {
-	console.log(document.body.scrollHeight > window.innerHeight)
 	if (document.body.scrollHeight > window.innerHeight) {
-		document.querySelector(".scroll-bar").className = "scroll-bar";
-		let scrollBlockHeight = window.innerHeight * (window.innerHeight / document.body.scrollHeight);
-		document.querySelector(".scroll-bar .scroll-block").style.height = `${scrollBlockHeight}px`;
-		changeScrollBarSize();
-		if (document.querySelector(".scroll-bar").className.includes("hiden")) {
-			document.querySelector(".scroll-bar .scroll-block").addEventListener("transitionend", function() {
+		let scrollBlockHeight = Math.round(window.innerHeight * (window.innerHeight / document.body.scrollHeight)),
+			scrollBlockEl = document.querySelector(".scroll-bar .scroll-block");
+		if (document.querySelector(".scroll-bar").className.includes("hiden") && scrollBlockEl.offsetHeight !== scrollBlockHeight) {
+			scrollBlockEl.style.transition = "all 0ms";
+			scrollBlockEl.style.height = `${scrollBlockHeight}px`;
+			setTimeout(() => {
+				scrollBlockEl.style.transition = "";
 				document.querySelector(".scroll-bar").className = "scroll-bar";
-			}, { once: true })
+			}, 0);
+		} else {
+			scrollBlockEl.style.height = `${scrollBlockHeight}px`;
+			document.querySelector(".scroll-bar").className = "scroll-bar";
 		}
+		changeScrollBarSize();
 	} else {
 		document.querySelector(".scroll-bar").className = "scroll-bar hiden";
 	}
@@ -136,7 +140,6 @@ customScrollBar();
 function customScrollBar() {
 	// 这主题开发过程中遇到一个很奇怪的bug,侧边的滑块会在未知情况下超出限制范围,但是当我开始调试时又完全无法复现了...
 	let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-	console.log(scrollTop, window.innerHeight, scrollTop / window.innerHeight)
 	scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
 	if (contentCH >= contentSH) {
 		scrollBar.className = "scroll-bar hiden";

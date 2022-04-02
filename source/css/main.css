@@ -482,6 +482,10 @@ body::-webkit-scrollbar {
 	padding: 0 4px;
 	margin: 4px 0;
 	display: inline-block;
+	max-width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	transition: text-shadow 300ms;
 }
