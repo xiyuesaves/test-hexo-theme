@@ -107,7 +107,9 @@ let count = 0,
 showScroll();
 
 function showScroll() {
+	console.log(document.body.scrollHeight > window.innerHeight)
 	if (document.body.scrollHeight > window.innerHeight) {
+		document.querySelector(".scroll-bar").className = "scroll-bar";
 		let scrollBlockHeight = window.innerHeight * (window.innerHeight / document.body.scrollHeight);
 		document.querySelector(".scroll-bar .scroll-block").style.height = `${scrollBlockHeight}px`;
 		changeScrollBarSize();
@@ -161,7 +163,9 @@ function customScrollBar() {
 		};
 		count = e.offsetY * multiple;
 		box.addEventListener('mousemove', mouseEvents);
-		scrollBar.className = "scroll-bar active"
+		if (!scrollBar.className.includes("hiden")) {
+			scrollBar.className = "scroll-bar active";
+		}
 	};
 
 	box.onmouseup = function() {
@@ -169,7 +173,9 @@ function customScrollBar() {
 		doc.onselectstart = function() {
 			return true;
 		}
-		scrollBar.className = "scroll-bar"
+		if (!scrollBar.className.includes("hiden")) {
+			scrollBar.className = "scroll-bar";
+		}
 	};
 
 	box.onmouseleave = function() {
@@ -177,7 +183,9 @@ function customScrollBar() {
 		doc.onselectstart = function() {
 			return true;
 		}
-		scrollBar.className = "scroll-bar"
+		if (!scrollBar.className.includes("hiden")) {
+			scrollBar.className = "scroll-bar";
+		}
 	}
 }
 
