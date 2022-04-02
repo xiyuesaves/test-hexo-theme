@@ -1,4 +1,5 @@
 <%
+	console.log(page)
 	let total = page.total,
 		current = page.current,
 		prev = page.prev,
@@ -26,12 +27,11 @@
 			}
 			--forLoop;
 		}
-		console.log(startPage,forLoop,theme.page.maxShowPage,total)
 		if(total > 1){
 %>
 <ul class="pages">
 	<li>
-		<a href="<%-prev === 1 ? '/' : `/page/${prev}/`%>" class="<%-prev !== 0 ? '' : 'none-page'%> prev-page">
+		<a href="<%-`/${page.prev_link}`%>" class="<%-prev !== 0 ? '' : 'none-page'%> prev-page">
 			<i class="icons i-next-page"></i>
 		</a>
 	</li>
@@ -39,7 +39,7 @@
 		if (startPage > 1) {
 	%>
 	<li>
-		<a href="/" class="">1</a>
+		<a href="<%-`/${page.base}`%>" class="">1</a>
 	</li>
 	<li>
 		<a href="" class="ellipsis">...</a>
@@ -49,7 +49,7 @@
 		for (let i = startPage; i <= forLoop; i++) {
 	%>
 	<li>
-		<a href="<%-i === 1 ? '/' : `/page/${i}/`%>" class="<%-i === current ? 'on-choose' : ''%>"><%-i%></a>
+		<a href="<%-i === 1 ? `/${page.base}` : `/${page.base}page/${i}/`%>" class="<%-i === current ? 'on-choose' : ''%>"><%-i%></a>
 	</li>
 	<%
 		}
@@ -59,13 +59,13 @@
 		<a href="" class="ellipsis">...</a>
 	</li>
 	<li>
-		<a href="<%-total === 1 ? '/' : `/page/${total}/`%>" class="<%-total === current ? 'on-choose' : ''%>"><%-total%></a>
+		<a href="<%-total === 1 ? `/${page.base}` : `/${page.base}page/${total}/`%>" class="<%-total === current ? 'on-choose' : ''%>"><%-total%></a>
 	</li>
 	<%
 		}
 	%>
 	<li>
-		<a href="<%-next === 0 ? '' : `/page/${next}/`%>" class="<%-next !== 0 ? '' : 'none-page'%> next-page">
+		<a href="<%-next === 0 ? '' : `/${page.next_link}`%>" class="<%-next !== 0 ? '' : 'none-page'%> next-page">
 			<i class="icons i-next-page"></i>
 		</a>
 	</li>
