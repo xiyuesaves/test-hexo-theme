@@ -1,0 +1,19 @@
+.archives-list{
+	width: 100%;
+	height: auto;
+	list-style: none;
+}
+.archives-list .date{
+	margin-bottom: 25px;
+	font-size: 18px;
+	color: #999999;
+}
+.archives-list .date .icons{
+	font-size: 18px;
+}
+.archives-list .post{
+	min-height: 50px!important;
+}
+.archives-list .post .titles{
+	font-size: 18px;
+}

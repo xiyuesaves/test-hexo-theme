@@ -1,1 +1,82 @@
-归档
+<!-- 文章列表 -->
+<div class="flex-item">
+	<!-- 文章列表 -->
+	<div class="post-list">
+		<ul class="archives-list">
+			<%
+				let post = page.posts.data,
+					date = dateFormat("YYYY-mm",new Date(post[0].date)),
+					showDate = 0;
+				function dateFormat(fmt, date) {
+					let ret;
+					const opt = {
+				      "Y+": date.getFullYear().toString(),        // 年
+				      "m+": (date.getMonth() + 1).toString(),     // 月
+				      "d+": date.getDate().toString(),            // 日
+				      "H+": date.getHours().toString(),           // 时
+				      "M+": date.getMinutes().toString(),         // 分
+				      "S+": date.getSeconds().toString()          // 秒
+				      // 有其他格式化字符需求可以继续添加，必须转化成字符串
+				  };
+				  for (let k in opt) {
+				      ret = new RegExp("(" + k + ")").exec(fmt);
+				      if (ret) {
+				          fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+				      };
+				  };
+				  return fmt;
+				}
+				page.posts.forEach(post => {
+					date = dateFormat("YYYY-mm",new Date(post.date));
+					let releaseDate = new Date(post.date).toLocaleString("zh-CN",{hour12: false, year:'numeric', month:'long', day:'numeric'	, hour:'2-digit',minute:'2-digit',second:'2-digit'});
+			%>
+			<%
+				if (showDate !== date) {
+					showDate = date;
+			%>
+			<li>
+				<p class="date"><i class="icons  i-date"></i> <%-date%></p>
+			</li>
+			<%}%>
+			<li>
+				<div class="post" href="/<%-post.path%>">
+					<a href="/<%-post.path%>" class="titles"><%-post.title%></a>
+					<%if(post.categories.length){%>
+							<div class="other-data categories">
+								<i class="icons i-categories"></i>
+								<%post.categories.forEach((el, index) => {%>
+									<%if(index){%>
+										<span class="delimiter"></span>
+									<%}%>
+									<a class="category" href="/<%-el.path%>"><%-el.name%></a>
+								<%})%>
+							</div>
+					<%}%>
+					<%if(post.tags.length){%>
+							<div class="other-data tags">
+								<%post.tags.forEach(post => {%>
+								<a class="tag" href="/<%-post.path%>"><i class="icons i-tags"></i><%-post.name%></a>
+								<%})%>
+							</div>
+					<%} else if(!post.categories.length) {%>
+							<div class="other-data tags">
+								<span class="tag">没有分类或标签 <i class="icons i-frown"></i></span>
+							</div>
+					<%}%>
+					<p class="date"><i class="icons i-date"></i><span title="<%-new Date(post.date)%>"><%-releaseDate%></span> </p>
+				</div>
+			</li>
+			<%})%>
+		</ul>
+	<%-include("public/page.ejs")%>
+	</div>
+	<!-- 侧边栏 -->
+	<div class="sidebar-item">
+		<!-- 用户信息 -->
+		<%-include("public/userInfo.ejs")%>
+		<!-- tag -->
+		<%-include("public/tag.ejs")%>
+		<!-- categories -->
+		<%-include("public/categories.ejs")%>
+	</div>
+</div>
