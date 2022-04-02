@@ -562,9 +562,6 @@ body::-webkit-scrollbar {
 	width: 16px;
 }
 
-.scroll-bar.active .scroll-block:after {
-	background-color: rgba(144, 144, 144, 0.8);
-}
 
 .scroll-bar .scroll-block::after {
 	content: "";
@@ -574,10 +571,14 @@ body::-webkit-scrollbar {
 	height: 100%;
 	backdrop-filter: blur(12px);
 	background-color: rgba(144, 144, 144, 0.6);
-	box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.08);
+	box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
 	transition: background-color 300ms;
 }
 
 .scroll-bar .scroll-block:hover:after {
+	background-color: rgba(144, 144, 144, 0.6);
+}
+
+.scroll-bar.active .scroll-block::after {
 	background-color: rgba(144, 144, 144, 0.8);
 }
