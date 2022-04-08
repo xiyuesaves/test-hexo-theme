@@ -5,23 +5,16 @@ avatar: /img/avatar.png  #头像路径
 introduction: 欢迎啦~  #欢迎词
 
 menu:
-  - home
-  - archives
-  - categories
-  - tags
-  - about
+  - home #首页
+  - archives #归档
+  - categories #分类
+  - tags #标签
+  - about #关于
 
-nav:
-  导航: 
-    首页: 
-      icon: i-home
-      url: /
-    关于:
-      icon: icon-yemian-copy-copy
-      url: /about
+fixelMenu: false
 
 page:
   maxShowPage: 5
 
-# 背景图
+# 默认背景图
 backgroundImage: /img/bg.jpg
