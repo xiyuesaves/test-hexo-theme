@@ -32,7 +32,7 @@
 			</div>
 	<%} else if(!post.categories.length) {%>
 			<div class="other-data tags">
-				<span class="tag"><i class="icons i-tags"></i>没有标签</span>
+				<span class="tag"><i class="icons i-frown"></i>没有分类或标签</span>
 			</div>
 	<%}%>
 			<p class="date"><i class="icons i-date"></i><span title="<%-new Date(post.date)%>"><%-releaseDate%></span> </p>
@@ -43,7 +43,7 @@
 	<%-include("public/page.ejs")%>
 	</div>
 	<!-- 侧边栏 -->
-	<div class="sidebar-item" style="top: <%- theme.fixelMenu ? "68px" : "28px"%>">
+	<div class="sidebar-item">
 		<!-- 用户信息 -->
 		<%-include("public/userInfo.ejs")%>
 		<!-- tag -->
