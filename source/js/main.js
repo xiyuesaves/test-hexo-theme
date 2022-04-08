@@ -6,6 +6,11 @@ topbar.config({
 	barThickness: 3
 });
 
+// 初始化目录功能
+let postToc = [],
+	showToc = false;
+initToc();
+
 // 启用pjax局部刷新
 const pjax = new Pjax({
 	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
@@ -194,10 +199,12 @@ function customScrollBar() {
 
 // 切换顶部导航
 let fixelEl = document.querySelector("#fixel-nav");
-showFixelNav();
-document.addEventListener("scroll", function() {
+if (fixelEl) {
 	showFixelNav();
-})
+	document.addEventListener("scroll", function() {
+		showFixelNav();
+	})
+}
 
 function showFixelNav() {
 	let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -208,10 +215,6 @@ function showFixelNav() {
 	}
 }
 
-// 目录刷新
-let postToc = [],
-	showToc = false;
-initToc();
 
 function initToc() {
 	if (document.querySelector(".toc")) {
