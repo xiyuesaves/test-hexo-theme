@@ -16,6 +16,8 @@
 			return starPage;
 		})(),
 		forLoop = total > maxShowPage ? (startPage + maxShowPage) : total;
+
+		// 计算正确起始序号
 		if (startPage === 2) {
 			++startPage;
 			if (forLoop + 1 <= total) {
@@ -27,6 +29,7 @@
 			}
 			--forLoop;
 		}
+
 		if(total > 1){
 %>
 <ul class="pages">
