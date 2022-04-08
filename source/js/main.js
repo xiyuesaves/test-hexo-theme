@@ -61,8 +61,8 @@ const pjax = new Pjax({
 					oldEl.addEventListener("transitionend", () => {
 						oldEl.remove();
 						newPic.className += " shadow-blur";
-						this.onSwitch();
 					}, { once: true });
+					this.onSwitch();
 				}
 			} else {
 				this.onSwitch();

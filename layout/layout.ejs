@@ -18,6 +18,12 @@
 	<%- css('css/archives.css') %>
 	<%- css('css/github-markdown.css') %>
 	<%- css('//at.alicdn.com/t/font_3205213_h4o1lfj9uh.css')%>
+	<!-- 动态计算样式 -->
+	<style type="text/css">
+		.sidebar-item{
+			top: <%- theme.fixelMenu ? "68px" : "28px" %>!important;
+		}
+	</style>
 </head>
 <body>
 	<div id="main">

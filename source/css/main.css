@@ -140,7 +140,7 @@ body::-webkit-scrollbar {
 #top-pic .bgi {
 	width: 100%;
 	height: 100%;
-	transition: opacity 300ms;
+	transition: opacity 600ms;
 	background-size: 0px;
 }
 
