@@ -8,6 +8,7 @@
 		return "";
 	}
 	let bgPic = page.picture ? page.picture.pic ? page.picture.pic : theme.backgroundImage : theme.backgroundImage;
+	if (theme.fixelMenu) {
 %>
 <div id="fixel-nav" class="head-nav" style="transform: translateY(-100%)">
 	<div class="center-block">
@@ -20,8 +21,8 @@
 		%>
 	</div>
 </div>
-
 <%
+	}
 	let title = config.title,
 		subtitle = config.subtitle,
 		isPost = false;
