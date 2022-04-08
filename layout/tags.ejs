@@ -1,1 +1,16 @@
-标签模板页
+<!-- 标签页面 -->
+<div class="flex-item">
+	<!-- 文章列表 -->
+	<div class="post-list">
+		<%console.log("标签页面",page)%>
+	</div>
+	<!-- 侧边栏 -->
+	<div class="sidebar-item">
+		<!-- 用户信息 -->
+		<%-include("public/userInfo.ejs")%>
+		<!-- tag -->
+		<%-include("public/tag.ejs")%>
+		<!-- categories -->
+		<%-include("public/categories.ejs")%>
+	</div>
+</div>

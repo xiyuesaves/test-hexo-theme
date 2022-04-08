@@ -1,5 +1,5 @@
 <%
-	// 判断选择哪个选项
+	// 判断激活哪个元素
 	function hasActive(name) {
 		let thisName = page.base || page.layout || "home";
 		if (thisName.includes(name)) {
@@ -30,20 +30,20 @@
 	if(page.layout){
 		switch(page.layout){ // 主要页面
 			case "tags":
-			title = "标签";
-			subtitle = `共有 ${site.tags.length} 个标签`;
-			break;
+				title = "标签";
+				subtitle = `共有 ${site.tags.length} 个标签`;
+				break;
 			case "categories":
-			title = "分类";
-			subtitle = `共有 ${site.categories.length} 个分类`;
-			break;
+				title = "分类";
+				subtitle = `共有 ${site.categories.length} 个分类`;
+				break;
 			case "about":
-			title = "关于";
-			subtitle = `你想了解点什么呢`;
-			break;
+				title = "关于";
+				subtitle = `你想了解点什么呢`;
+				break;
 			default: // 子页面
-			postPage();
-			break;
+				postPage();
+				break;
 		}
 	} else if(page.__index){
 		// 首页
@@ -55,12 +55,24 @@
 		subtitle = "在时间里寻找答案";
 	} else if(page.tag){
 		title = page.tag;
-		subtitle = `共有 ${page.posts.length} 篇文章`;
+		subtitle = `当前标签下有 ${page.posts.length} 篇文章`;
+		bgPic = getPic("tags");
 	} else if(page.category){
 		title = page.category;
-		subtitle = `共有 ${page.posts.length} 篇文章`;
+		subtitle = `当前分类下有 ${page.posts.length} 篇文章`;
+		bgPic = getPic("categories");
 	}
 
+	// 获取页面banner图片
+	function getPic(pageName) {
+		for (var i = 0; i < site.pages.length; i++) {
+			if (site.pages.data[i].layout === pageName) {
+				return site.pages.data[i].picture ? site.pages.data[i].picture.pic ? site.pages.data[i].picture.pic : theme.backgroundImage : theme.backgroundImage;
+			}
+		}
+	}
+
+	// 文章页面
 	function postPage(){
 		title = page.title;
 		isPost = true;
