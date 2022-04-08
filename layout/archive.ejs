@@ -42,11 +42,14 @@
 			<%}}%>
 			<li>
 				<div class="post" href="/<%-post.path%>">
-					<a href="/<%-post.path%>" class="titles"><%-post.title%></a>
-					<!-- <div class="introduction markdown-body">
+					<%if (!isArchive) {%>
+					<a href="/<%-post.path%>" class="link title"><%-post.title%></a>
+					<div class="introduction markdown-body">
 						<%-post.excerpt%>
-					</div> -->
-					<%if(post.categories.length){%>
+					</div>
+					<%} else {%>
+					<a href="/<%-post.path%>" class="titles"><%-post.title%></a>
+					<%}if(post.categories.length){%>
 							<div class="other-data categories">
 								<i class="icons i-categories"></i>
 								<%post.categories.forEach((el, index) => {%>
@@ -65,7 +68,7 @@
 							</div>
 					<%} else if(!post.categories.length) {%>
 							<div class="other-data tags">
-								<span class="tag">没有分类或标签 <i class="icons i-frown"></i></span>
+								<span class="tag"><i class="icons i-frown"></i>没有分类或标签</span>
 							</div>
 					<%}%>
 					<p class="date"><i class="icons i-date"></i><span title="<%-new Date(post.date)%>"><%-releaseDate%></span> </p>
