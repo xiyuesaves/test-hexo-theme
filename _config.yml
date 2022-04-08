@@ -7,8 +7,8 @@ introduction: 欢迎啦~  #欢迎词
 menu:
   - home #首页
   - archives #归档
-  - categories #分类
-  - tags #标签
+  #- categories #分类
+  #- tags #标签
   - about #关于
 
 fixelMenu: false
