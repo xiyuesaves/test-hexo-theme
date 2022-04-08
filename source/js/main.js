@@ -1,3 +1,8 @@
+let themer = localStorage.getItem('colorThemer');
+if (themer) {
+	document.querySelector("html").className = themer;
+}
+
 // 设置加载进度条颜色
 topbar.config({
 	barColors: {
@@ -11,7 +16,7 @@ let postToc = [],
 	showToc = false;
 initToc();
 
-// 启用pjax局部刷新
+// pjax初始化
 const pjax = new Pjax({
 	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
 	cacheBust: false, // 阻止携带时间戳
@@ -58,9 +63,11 @@ const pjax = new Pjax({
 					newPic.style.backgroundImage = newUrl;
 					oldEl.parentNode.appendChild(newPic);
 					oldEl.className += " hidden";
+					oldEl.addEventListener("transitionstart", () => {
+						newPic.className += " shadow-blur";
+					}, { once: true });
 					oldEl.addEventListener("transitionend", () => {
 						oldEl.remove();
-						newPic.className += " shadow-blur";
 					}, { once: true });
 					this.onSwitch();
 				}
@@ -81,7 +88,7 @@ const pjax = new Pjax({
 	timeout: 5000 // 请求超时时长
 });
 
-// 监听pjax事件展示加载进度条
+// 加载进度条
 document.addEventListener('pjax:send', () => {
 	topbar.show();
 });
@@ -143,7 +150,7 @@ function changeScrollBarSize() {
 customScrollBar();
 
 function customScrollBar() {
-	// 这主题开发过程中遇到一个很奇怪的bug,侧边的滑块会在未知情况下超出限制范围,但是当我开始调试时又完全无法复现了...
+	// 这个函数在开发过程中遇到一个很奇怪的bug,侧边的滑块会在未知情况下超出限制范围,但是当我开始调试时又完全无法复现了...
 	let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 	scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
 	if (contentCH >= contentSH) {
@@ -215,7 +222,7 @@ function showFixelNav() {
 	}
 }
 
-
+// 目录初始化
 function initToc() {
 	if (document.querySelector(".toc")) {
 		showToc = true;
@@ -261,4 +268,28 @@ function goto(title) {
 		left: 0,
 		behavior: "smooth"
 	});
+}
+
+// 主题切换
+function changeThemer(type) {
+	let htmlEl = document.querySelector("html")
+	if (["dark", "light"].indexOf(type) !== -1) {
+		htmlEl.className = `transition-color `;
+		setTimeout(() => {
+			htmlEl.className += type;
+		},0)
+		document.body.addEventListener("transitionend", function() {
+			console.log("全局动画结束");
+			htmlEl.className = type;
+		}, { once: true })
+		localStorage.setItem('colorThemer', type)
+	} else {
+		// 自动切换
+		let thisType = htmlEl.className || "light";
+		if (thisType === "dark") {
+			changeThemer("light");
+		} else {
+			changeThemer("dark");
+		}
+	}
 }

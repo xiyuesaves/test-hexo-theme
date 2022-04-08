@@ -1,0 +1,99 @@
+html.dark {
+	/* 基础颜色 */
+	--color: rgb(173, 186, 199);
+	--url-color: rgb(187, 200, 213);
+	--body-bgcolor: rgb(30, 36, 40);
+	--box-shadow-color: rgba(0, 0, 0, 0.15);
+	--post-other-color: rgb(108, 132, 151);
+	--post-data-color: rgb(103, 126, 146);
+	--default-bgcolor: rgb(57, 66, 75);
+	--default-box-shadow-color: rgba(0, 0, 0, 0.05);
+	/* 悬浮栏 */
+	--fixel-nav-bgcolor: rgba(0, 0, 0, 0.4);
+	--back-link-color: #dddddd;
+	--back-link-active-color: #ffffff;
+	--back-link-border-color: #f0f0f0;
+	--back-link-text-shadow-color: transparent;
+	/* banner */
+	--banner-text-color: rgba(240, 242, 244, 1);
+	--banner-text-shadow-color: rgba(0, 0, 0, 0.7);
+	--top-title-text-shadow-color: rgba(0, 0, 0, 0.5);
+	/* 行内代码块 */
+	--code-box-shadow-color: rgba(0, 0, 0, 0.15);
+	--code-bgcolor: #2A3036;
+	/* 代码高亮 */
+	--highlight-bgcolor: #1c1b19;
+	--highlight-box-shadow-color: rgba(28, 27, 25, 0.3);
+	--highlight-line: #918175;
+	--scrollbar-bgcolor: #1c1b19;
+	--scrollbar-thumb-color: #918175;
+	--selection-bgcolor: rgba(252, 232, 195, 0.3);
+	/* user-info模块 */
+	--user-info-box-shadow-color: rgba(0, 0, 0, 0.05);
+	/* 目录 */
+	--toc-read-color: rgba(104, 128, 150, 1);
+	--toc-active-color: rgba(205, 220, 240, 1);
+	/* 自定义滚动条 */
+	--scroll-block-bgcolor: rgba(180, 180, 180, 0.5);
+	--scroll-box-shadow: rgba(0, 0, 0, 0.1);
+	--scroll-active-bgcolor: rgba(220, 220, 220, 0.5);
+	/* 归档 */
+	--archives-list-color: rgba(213, 219, 225, 0.8);
+	/* 翻页模块 */
+	--page-color: #c9d1d9;
+	--page-box-shadow-color: rgb(0, 0, 0, 0.05);
+	--page-disable: #666666;
+}
+
+html.dark #top-pic .bgi {
+	filter: brightness(75%);
+}
+
+html.light,
+html {
+	/* 基础颜色 */
+	--banner-text-color: #ffffff;
+	--color: #3e3e4f;
+	--url-color: #3e3e3e;
+	--body-bgcolor: #f5f8fa;
+	--box-shadow-color: rgba(0, 0, 0, 0.15);
+	--post-other-color: #999999;
+	--post-data-color: #aaaaaa;
+	--default-bgcolor: #ffffff;
+	--default-box-shadow-color: rgba(0, 0, 0, 0.05);
+	/* 悬浮栏 */
+	--fixel-nav-bgcolor: rgba(255, 255, 255, 0.8);
+	--back-link-color: #959595;
+	--back-link-active-color: #333333;
+	--back-link-border-color: #666666;
+	--back-link-text-shadow-color: #e2e2e2e2;
+	/* banner */
+	--banner-text-color: #ffffff;
+	--banner-text-shadow-color: rgba(0, 0, 0, 0.7);
+	--top-title-text-shadow-color: rgba(0, 0, 0, 0.5);
+	/* 行内代码块 */
+	--code-box-shadow-color: rgba(0, 0, 0, 0.15);
+	--code-bgcolor: #f6f8fa;
+	/* 代码高亮 */
+	--highlight-bgcolor: #1c1b19;
+	--highlight-box-shadow-color: rgba(28, 27, 25, 0.3);
+	--highlight-line: #918175;
+	--scrollbar-bgcolor: #1c1b19;
+	--scrollbar-thumb-color: #918175;
+	--selection-bgcolor: rgba(252, 232, 195, 0.3);
+	/* user-info模块 */
+	--user-info-box-shadow-color: rgba(0, 0, 0, 0.05);
+	/* 目录 */
+	--toc-read-color: #999999;
+	--toc-active-color: #0969da;
+	/* 自定义滚动条 */
+	--scroll-block-bgcolor: rgba(180, 180, 180, 0.5);
+	--scroll-box-shadow: rgba(0, 0, 0, 0.1);
+	--scroll-active-bgcolor: rgba(140, 140, 140, 0.5);
+	/* 归档 */
+	--archives-list-color: #999999;
+	/* 翻页模块 */
+	--page-color: #666666;
+	--page-box-shadow-color: rgb(0, 0, 0, 0.05);
+	--page-disable: #dddddd;
+}

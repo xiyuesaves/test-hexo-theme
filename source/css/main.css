@@ -1,12 +1,23 @@
-* {
+/* 覆写样式不影响代码块 */
+body :not(figure *) {
 	text-decoration: none;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	color: var(--color);
 }
 
-a {
-	color: #3e3e3e;
+body a {
+	color: var(--url-color);
+}
+
+html.transition-color * {
+	transition: color 600ms,
+		background 600ms,
+		box-shadow 600ms,
+		text-shadow 600ms,
+		filter 600ms,
+		border-color 600ms !important;
 }
 
 body {
@@ -17,8 +28,8 @@ body {
 	min-height: 100vh;
 	padding-bottom: 1px;
 	background-attachment: fixed;
-	color: #3e3e3e;
-	background-color: #f5f8fa;
+	background-color: var(--body-bgcolor);
+	color: var(--color);
 	scrollbar-width: none;
 	/* Firefox */
 	-ms-overflow-style: none;
@@ -30,7 +41,7 @@ body::-webkit-scrollbar {
 	width: 0 !important;
 }
 
-
+/* 悬浮导航栏样式 */
 #fixel-nav {
 	position: fixed;
 	top: 0;
@@ -39,25 +50,12 @@ body::-webkit-scrollbar {
 	height: 40px;
 	z-index: 999;
 	backdrop-filter: blur(12px);
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: var(--fixel-nav-bgcolor);
 	transition: transform 300ms;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 0 20px var(--box-shadow-color);
 }
 
-#top-nav {
-	position: absolute;
-	pointer-events: auto;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 40px;
-	z-index: 800;
-	/*backdrop-filter: blur(12px);*/
-	/*background-color: rgba(0, 0, 0, 0.3);*/
-	transition: transform 300ms;
-}
-
-.head-nav .center-block {
+#fixel-nav .center-block {
 	width: 100%;
 	margin: 0 auto;
 	max-width: 1200px;
@@ -68,64 +66,85 @@ body::-webkit-scrollbar {
 	justify-content: center;
 }
 
-#top-nav .center-block {
-	justify-content: space-between;
-}
-
-#top-nav .center-block .about {
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 20px;
-	text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
-
-#top-nav .center-block .back-link {
-	padding: 0 10px;
-}
-
-.head-nav .center-block .back-link {
-	font-size: 14px;
+#fixel-nav .center-block .back-link {
 	padding: 0 20px;
+	font-size: 14px;
 	height: 100%;
 	border-top: solid 2px transparent;
 	border-bottom: solid 2px transparent;
 	box-sizing: border-box;
 	transition: 200ms;
-}
-
-#fixel-nav .center-block .back-link {
-	text-shadow: 1px 1px #e2e2e2e2;
-	color: #959595;
-}
-
-#top-nav .center-block .back-link {
-	text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-	color: #ffffff;
-}
-
-#top-nav .center-block .back-link:hover {
-	color: #ffffff;
+	text-shadow: 1px 1px var(--back-link-text-shadow-color);
+	color: var(--back-link-color);
 }
 
 #fixel-nav .center-block .back-link:hover {
-	color: #333333;
-}
-
-#top-nav .center-block .back-link.active {
-	border-bottom-color: #f0f0f0;
-	color: #ffffff;
+	color: var(--back-link-active-color);
 }
 
 #fixel-nav .center-block .back-link.active {
-	border-bottom-color: #666666;
-	color: #333333;
+	border-bottom-color: var(--back-link-border-color);
+	color: var(--back-link-active-color);
 }
 
-.head-nav .center-block .back-link.icons::before {
+#fixel-nav .center-block .back-link.icons::before {
 	font-size: 14px;
 	margin-right: 4px;
 }
 
+/* 顶部导航栏 */
+#top-nav {
+	position: absolute;
+	pointer-events: auto;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	z-index: 800;
+	transition: transform 300ms;
+}
+
+#top-nav .center-block {
+	width: 100%;
+	margin: 0 auto;
+	max-width: 1200px;
+	height: 100%;
+	line-height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#top-nav .center-block .about {
+	color: var(--banner-text-color);
+	font-weight: bold;
+	font-size: 20px;
+	text-shadow: 1px 1px 4px var(--banner-text-shadow-color);
+}
+
+
+#top-nav .center-block .back-link {
+	font-size: 14px;
+	padding: 0 10px;
+	height: 100%;
+	border-top: solid 2px transparent;
+	border-bottom: solid 2px transparent;
+	box-sizing: border-box;
+}
+
+#top-nav .center-block .back-link {
+	text-shadow: 1px 1px 4px var(--banner-text-shadow-color);
+	color: var(--banner-text-color);
+}
+
+#top-nav .center-block .back-link.icons::before {
+	font-size: 14px;
+	margin-right: 4px;
+}
+
+#top-pic .center-box * {
+	color: var(--banner-text-color);
+}
 
 #top-pic {
 	width: 100%;
@@ -134,9 +153,16 @@ body::-webkit-scrollbar {
 	background-size: 0px;
 	position: relative;
 	overflow: hidden;
-	pointer-events: none;
 }
 
+#top-pic .bgi {
+	width: 100%;
+	height: 100%;
+	transition: opacity 600ms;
+	background-size: 0px;
+}
+
+/*
 #top-pic * {
 	pointer-events: none;
 }
@@ -149,19 +175,10 @@ body::-webkit-scrollbar {
 	pointer-events: auto;
 }
 
-#top-pic .bgi {
-	width: 100%;
-	height: 100%;
-	transition: opacity 600ms, filter 300ms;
-	background-size: 0px;
-	filter: brightness(100%);
-	transition-delay: 150ms;
-}
-
 #top-pic:hover .bgi {
 	transition-delay: 0ms;
 	filter: brightness(70%);
-}
+}*/
 
 #top-pic .bgi.hidden {
 	position: absolute;
@@ -184,7 +201,6 @@ body::-webkit-scrollbar {
 	background-position: center;
 	background-image: inherit;
 	pointer-events: auto;
-	box-shadow: 0 0px 30px rgba(100, 100, 100, .15);
 	pointer-events: none;
 }
 
@@ -229,40 +245,36 @@ body::-webkit-scrollbar {
 #top-pic .top-title .big-title-item {
 	display: flex;
 	height: 100%;
-	width: 1200px;
+	width: 100%;
 	margin: 0 auto;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	text-shadow: 0 2px 4px rgb(0 0 0 / 50%);
+	text-shadow: 0 2px 4px var(--top-title-text-shadow-color);
 }
 
 #top-pic .top-title .big-title {
 	text-align: center;
 	font-size: 46px;
-	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+	text-shadow: 0 2px 10px var(--top-title-text-shadow-color);
 }
 
 #top-pic .top-title p {
 	text-align: center;
 	margin-top: 16px;
 	font-weight: 600;
-	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-#top-pic .top-title * {
-	color: #ffffff;
+	text-shadow: 0 2px 4px var(--top-title-text-shadow-color);
 }
 
 #top-pic .detail-item {
 	display: flex;
 	height: 100%;
-	width: 1200px;
+	width: 100%;
 	margin: 0 auto;
 	align-items: flex-start;
 	justify-content: center;
 	flex-direction: column;
-	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+	text-shadow: 0 2px 4px var(--top-title-text-shadow-color);
 }
 
 #top-pic .detail-item .big-title {
@@ -313,7 +325,7 @@ body::-webkit-scrollbar {
 
 #main-block {
 	padding: 2px;
-	transition: 200ms;
+	transition: opacity 200ms;
 	padding-bottom: 60px;
 }
 
@@ -323,9 +335,9 @@ body::-webkit-scrollbar {
 }
 
 .post-content p>code {
-	background-color: #f6f8fa;
+	background-color: var(--code-bgcolor);
 	margin: 0 2px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 2px 6px var(--code-box-shadow-color);
 	padding: 2px 3px;
 	border-radius: 4px;
 }
@@ -336,8 +348,8 @@ body::-webkit-scrollbar {
 	margin-left: 0;
 	margin-right: 0;
 	box-sizing: border-box;
-	background-color: #1c1b19;
-	box-shadow: 0 2px 6px rgba(28, 27, 25, 0.3);
+	background-color: var(--highlight-bgcolor);
+	box-shadow: 0 2px 6px var(--highlight-box-shadow-color);
 }
 
 .post-content .highlight tr {
@@ -357,7 +369,7 @@ body::-webkit-scrollbar {
 }
 
 .post-content .highlight .gutter .line {
-	color: #918175;
+	color: var(--highlight-line);
 }
 
 .post-content .highlight .code code {
@@ -376,7 +388,7 @@ body::-webkit-scrollbar {
 
 /* 滚动条背景 */
 .post-content .highlight table *::-webkit-scrollbar-track-piece {
-	background-color: #1c1b19;
+	background-color: var(--scrollbar-bgcolor);
 }
 
 /* 滚动条按钮 */
@@ -386,24 +398,24 @@ body::-webkit-scrollbar {
 
 /* 滚动条滑块 */
 .post-content .highlight table *::-webkit-scrollbar-thumb {
-	background-color: #918175;
+	background-color: var(--scrollbar-thumb-color);
 	border-radius: 4px;
-	box-shadow: 0 0 4px #918175;
+	box-shadow: 0 0 4px var(--scrollbar-thumb-color);
 }
 
 .post-content .highlight .code *::selection {
 	color: inherit;
-	background: rgba(252, 232, 195, 0.3);
+	background: var(--selection-bgcolor);
 }
 
 .post-content .highlight .code *::-moz-selection {
 	color: inherit;
-	background: rgba(252, 232, 195, 0.3);
+	background: var(--selection-bgcolor);
 }
 
 .post-content .highlight .code *::-webkit-selection {
 	color: inherit;
-	background: rgba(252, 232, 195, 0.3);
+	background: var(--selection-bgcolor);
 }
 
 
@@ -433,7 +445,7 @@ body::-webkit-scrollbar {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 8px 20px var(--user-info-box-shadow-color);
 }
 
 #main .center-block .sidebar-item .user-info .author {
@@ -442,13 +454,13 @@ body::-webkit-scrollbar {
 	margin-bottom: 8px;
 	letter-spacing: 2px;
 	/*仅用于拉伸亿点点字间距*/
-	text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	text-shadow: 0 4px 6px var(--user-info-box-shadow-color);
 }
 
 #main .center-block .sidebar-item .user-info .subtitle {
 	font-size: 14px;
 	margin-bottom: 16px;
-	text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	text-shadow: 0 4px 6px var(--user-info-box-shadow-color);
 }
 
 #main .center-block .sidebar-item .user-info .count-item {
@@ -458,9 +470,16 @@ body::-webkit-scrollbar {
 	font-size: 14px;
 	align-items: center;
 	justify-content: space-around;
+
 }
 
-#main .center-block .sidebar-item .user-info .count-item .icons:before {
+#main .center-block .sidebar-item .user-info .count-item .count {
+	font-size: 16px;
+}
+
+#main .center-block .sidebar-item .user-info .count-item .icons::before {
+	color: var(--color);
+	transition: inherit;
 	font-size: 22px;
 	margin-right: 4px;
 }
@@ -471,8 +490,8 @@ body::-webkit-scrollbar {
 	padding: 15px 30px;
 	border-radius: 8px;
 	margin-bottom: 28px;
-	background-color: #ffffff;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+	background-color: var(--default-bgcolor);
+	box-shadow: 0 8px 20px var(--user-info-box-shadow-color);
 }
 
 
@@ -481,7 +500,9 @@ body::-webkit-scrollbar {
 	margin-bottom: 16px;
 }
 
-#main .center-block .sidebar-item .sidebar .big-title .icons:before {
+#main .center-block .sidebar-item .sidebar .big-title .icons::before {
+	color: var(--color);
+	transition: inherit;
 	font-size: 26px;
 }
 
@@ -525,11 +546,11 @@ body::-webkit-scrollbar {
 }
 
 #main .center-block .sidebar-item .toc .read {
-	color: #999999;
+	color: var(--toc-read-color);
 }
 
 #main .center-block .sidebar-item .toc .active {
-	color: #0969da;
+	color: var(--toc-active-color);
 }
 
 #main .center-block .sidebar-item .toc ul {
@@ -586,15 +607,15 @@ body::-webkit-scrollbar {
 	width: 100%;
 	height: 100%;
 	backdrop-filter: blur(12px);
-	background-color: rgba(180, 180, 180, 0.5);
-	box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
+	background-color: var(--scroll-block-bgcolor);
+	box-shadow: -2px 0px 10px var(--scroll-box-shadow);
 	transition: background-color 300ms;
 }
 
 .scroll-bar .scroll-block:hover:after {
-	background-color: rgba(180, 180, 180, 0.5);
+	background-color: var(--scroll-block-bgcolor);
 }
 
 .scroll-bar.active .scroll-block::after {
-	background-color: rgba(140, 140, 140, 0.5);
+	background-color: var(--scroll-active-bgcolor);
 }

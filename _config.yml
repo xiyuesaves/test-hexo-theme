@@ -11,7 +11,7 @@ menu:
   #- tags #标签
   - about #关于
 
-fixelMenu: false
+fixelMenu: true
 
 page:
   maxShowPage: 5
