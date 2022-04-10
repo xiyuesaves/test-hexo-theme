@@ -76,13 +76,15 @@ const pjax = new Pjax({
 			}
 		},
 		"#top-pic .center-box"(oldEl, newEl) { // title信息
-			let parentEl = oldEl.parentNode;
-			parentEl.style.opacity = 0;
-			parentEl.addEventListener("transitionend", () => {
-				oldEl.outerHTML = newEl.outerHTML;
-				parentEl.style.opacity = 1;
-				this.onSwitch();
-			}, { once: true });
+			if (oldEl.outerHTML !== newEl.outerHTML) {
+				let parentEl = oldEl.parentNode;
+				parentEl.style.opacity = 0;
+				parentEl.addEventListener("transitionend", () => {
+					oldEl.outerHTML = newEl.outerHTML;
+					parentEl.style.opacity = 1;
+					this.onSwitch();
+				}, { once: true });
+			}
 		}
 	},
 	timeout: 5000 // 请求超时时长
@@ -277,7 +279,7 @@ function changeThemer(type) {
 		htmlEl.className = `transition-color `;
 		setTimeout(() => {
 			htmlEl.className += type;
-		},0)
+		}, 0)
 		document.body.addEventListener("transitionend", function() {
 			console.log("全局动画结束");
 			htmlEl.className = type;
