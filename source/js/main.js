@@ -26,11 +26,15 @@ const pjax = new Pjax({
 		"#main-block .center-block"(oldEl, newEl) { // 正文
 			let mainEl = document.querySelector("#main-block");
 			mainEl.style.opacity = 0;
-			mainEl.addEventListener("transitionend", () => {
-				mainEl.style.opacity = 1;
-				oldEl.outerHTML = newEl.outerHTML;
-				this.onSwitch();
-			}, { once: true });
+			let transitionEnd = (event) => {
+				if (event.target.id.includes("main-block")) {
+					mainEl.style.opacity = 1;
+					oldEl.outerHTML = newEl.outerHTML;
+					mainEl.removeEventListener("transitionend", transitionEnd);
+					this.onSwitch();
+				}
+			}
+			mainEl.addEventListener("transitionend", transitionEnd, false);
 		},
 		"#fixel-nav .center-block"(oldEl, newEl) { // 顶栏
 			let selectPage = newEl.querySelector(".active"),
@@ -298,16 +302,21 @@ function changeThemer(type) {
 	if (!switchIn) {
 		let htmlEl = document.querySelector("html")
 		if (["dark", "light"].indexOf(type) !== -1) {
-			switchIn = !switchIn;
+			switchIn = true;
 			htmlEl.className = `transition-color `;
+			localStorage.setItem('colorThemer', type);
 			setTimeout(() => {
 				htmlEl.className += type;
-			}, 0)
-			document.body.addEventListener("transitionend", function() {
-				switchIn = !switchIn;
-				htmlEl.className = type;
-			}, { once: true })
-			localStorage.setItem('colorThemer', type)
+			}, 0);
+			// 只有过度时间是指定时间的事件触发时才判定为结束
+			let transitionEnd = (event) => {
+				if (event.elapsedTime === 0.6) {
+					switchIn = false;
+					htmlEl.className = type;
+					document.body.removeEventListener("transitionend", transitionEnd);
+				}
+			}
+			document.body.addEventListener("transitionend", transitionEnd, false);
 		} else {
 			// 自动切换
 			let thisType = htmlEl.className || "light";

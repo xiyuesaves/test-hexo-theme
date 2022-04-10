@@ -325,7 +325,7 @@ body::-webkit-scrollbar {
 
 #main-block {
 	padding: 2px;
-	transition: opacity 200ms;
+	transition: opacity 300ms;
 	padding-bottom: 60px;
 }
 
