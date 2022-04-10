@@ -122,24 +122,40 @@ showScroll();
 
 function showScroll() {
 	if (document.body.scrollHeight > window.innerHeight) {
+		changeScrollBarSize();
 		let scrollBlockHeight = Math.round(window.innerHeight * (window.innerHeight / document.body.scrollHeight)),
-			scrollBlockEl = document.querySelector(".scroll-bar .scroll-block");
-		if (document.querySelector(".scroll-bar").className.includes("hiden") && scrollBlockEl.offsetHeight !== scrollBlockHeight) {
-			scrollBlockEl.style.transition = "all 0ms";
-			scrollBlockEl.style.height = `${scrollBlockHeight}px`;
+			scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
+		if (scrollBar.className.includes("hiden") && scroll.offsetHeight !== scrollBlockHeight) {
+			scroll.style.transition = "all 0ms";
+			scroll.style.height = `${scrollBlockHeight}px`;
 			setTimeout(() => {
-				scrollBlockEl.style.transition = "";
+				scroll.style.transition = "";
 				document.querySelector(".scroll-bar").className = "scroll-bar";
 			}, 0);
 		} else {
-			scrollBlockEl.style.height = `${scrollBlockHeight}px`;
-			document.querySelector(".scroll-bar").className = "scroll-bar";
+			scroll.style.height = `${scrollBlockHeight}px`;
+			scrollBar.className = "scroll-bar";
 		}
-		changeScrollBarSize();
 	} else {
-		document.querySelector(".scroll-bar").className = "scroll-bar hiden";
+		scrollBar.className = "scroll-bar hiden";
 	}
 }
+
+// 监听页面尺寸变化修改滚动条滑块参数
+window.addEventListener("resize", () => {
+	if (document.body.scrollHeight > window.innerHeight) {
+		if (scrollBar.className.includes("hiden")) {
+			scrollBar.className = "scroll-bar";
+		}
+		let scrollBlockHeight = Math.round(window.innerHeight * (window.innerHeight / document.body.scrollHeight)),
+			scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
+		scroll.style.height = `${scrollBlockHeight}px`;
+	} else {
+		scrollBar.className = "scroll-bar hiden";
+	}
+})
 
 function changeScrollBarSize() {
 	scrollBarHeight = scrollBar.clientHeight; // .scroll-bar 可视区域高度
@@ -215,6 +231,7 @@ if (fixelEl) {
 	})
 }
 
+// 显示浮动导航栏
 function showFixelNav() {
 	let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 	if (scrollTop > 40) {
@@ -298,7 +315,5 @@ function changeThemer(type) {
 				changeThemer("dark");
 			}
 		}
-	} else {
-		console.log("切换进行中");
 	}
 }
