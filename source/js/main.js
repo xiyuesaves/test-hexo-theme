@@ -273,25 +273,32 @@ function goto(title) {
 }
 
 // 主题切换
+let switchIn = false;
+
 function changeThemer(type) {
-	let htmlEl = document.querySelector("html")
-	if (["dark", "light"].indexOf(type) !== -1) {
-		htmlEl.className = `transition-color `;
-		setTimeout(() => {
-			htmlEl.className += type;
-		}, 0)
-		document.body.addEventListener("transitionend", function() {
-			console.log("全局动画结束");
-			htmlEl.className = type;
-		}, { once: true })
-		localStorage.setItem('colorThemer', type)
-	} else {
-		// 自动切换
-		let thisType = htmlEl.className || "light";
-		if (thisType === "dark") {
-			changeThemer("light");
+	if (!switchIn) {
+		let htmlEl = document.querySelector("html")
+		if (["dark", "light"].indexOf(type) !== -1) {
+			switchIn = !switchIn;
+			htmlEl.className = `transition-color `;
+			setTimeout(() => {
+				htmlEl.className += type;
+			}, 0)
+			document.body.addEventListener("transitionend", function() {
+				switchIn = !switchIn;
+				htmlEl.className = type;
+			}, { once: true })
+			localStorage.setItem('colorThemer', type)
 		} else {
-			changeThemer("dark");
+			// 自动切换
+			let thisType = htmlEl.className || "light";
+			if (thisType === "dark") {
+				changeThemer("light");
+			} else {
+				changeThemer("dark");
+			}
 		}
+	} else {
+		console.log("切换进行中");
 	}
 }
