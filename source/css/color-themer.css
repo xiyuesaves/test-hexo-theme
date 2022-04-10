@@ -15,7 +15,7 @@ html.dark {
 	--back-link-border-color: #f0f0f0;
 	--back-link-text-shadow-color: transparent;
 	/* banner */
-	--banner-text-color: rgba(216, 224, 230, 1);
+	--banner-text-color: rgba(235, 235, 235, 1);
 	--banner-text-shadow-color: rgba(0, 0, 0, 0.7);
 	--top-title-text-shadow-color: rgba(0, 0, 0, 0.5);
 	/* 行内代码块 */
@@ -32,7 +32,7 @@ html.dark {
 	--user-info-box-shadow-color: rgba(0, 0, 0, 0.05);
 	/* 目录 */
 	--toc-read-color: rgba(104, 128, 150, 1);
-	--toc-active-color: rgba(205, 220, 240, 1);
+	--toc-active-color: #58a6ff;
 	/* 自定义滚动条 */
 	--scroll-block-bgcolor: rgba(180, 180, 180, 0.5);
 	--scroll-box-shadow: rgba(0, 0, 0, 0.1);
@@ -87,9 +87,9 @@ html {
 	--toc-read-color: #999999;
 	--toc-active-color: #0969da;
 	/* 自定义滚动条 */
-	--scroll-block-bgcolor: rgba(180, 180, 180, 0.5);
+	--scroll-block-bgcolor: rgba(140, 140, 140, 0.5);
 	--scroll-box-shadow: rgba(0, 0, 0, 0.1);
-	--scroll-active-bgcolor: rgba(140, 140, 140, 0.5);
+	--scroll-active-bgcolor: rgba(100, 100, 100, 0.5);
 	/* 归档 */
 	--archives-list-color: #999999;
 	/* 翻页模块 */

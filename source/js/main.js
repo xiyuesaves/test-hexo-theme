@@ -84,6 +84,8 @@ const pjax = new Pjax({
 					parentEl.style.opacity = 1;
 					this.onSwitch();
 				}, { once: true });
+			} else {
+				this.onSwitch();
 			}
 		}
 	},
