@@ -1,4 +1,5 @@
-let themer = localStorage.getItem('colorThemer');
+let themer = localStorage.getItem('colorThemer'),
+	pageLoading = false;
 if (themer) {
 	document.querySelector("html").className = themer;
 }
@@ -99,6 +100,7 @@ const pjax = new Pjax({
 // 加载进度条
 document.addEventListener('pjax:send', () => {
 	topbar.show();
+	pageLoading = true;
 });
 document.addEventListener('pjax:complete', () => {
 	window.scrollTo({
@@ -109,6 +111,7 @@ document.addEventListener('pjax:complete', () => {
 	showScroll();
 	initToc();
 	topbar.hide();
+	pageLoading = false;
 });
 
 // 判断是否展示滚动条
@@ -132,12 +135,13 @@ function showScroll() {
 		let scrollBlockHeight = Math.round(window.innerHeight * (window.innerHeight / document.body.scrollHeight)),
 			scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
+		console.log(scrollBar.className, scroll.offsetHeight, scrollBlockHeight)
 		if (scrollBar.className.includes("hiden") && scroll.offsetHeight !== scrollBlockHeight) {
 			scroll.style.transition = "all 0ms";
-			scroll.style.height = `${scrollBlockHeight}px`;
 			setTimeout(() => {
-				scroll.style.transition = "";
-				document.querySelector(".scroll-bar").className = "scroll-bar";
+				scroll.style.height = `${scrollBlockHeight}px`;
+				// scroll.style.transition = "";
+				scrollBar.className = "scroll-bar";
 			}, 0);
 		} else {
 			scroll.style.height = `${scrollBlockHeight}px`;
@@ -150,6 +154,9 @@ function showScroll() {
 
 // 监听页面尺寸变化修改滚动条滑块参数
 window.addEventListener("resize", () => {
+	if (!pageLoading) {
+		return
+	}
 	if (document.body.scrollHeight > window.innerHeight) {
 		if (scrollBar.className.includes("hiden")) {
 			scrollBar.className = "scroll-bar";
@@ -158,7 +165,7 @@ window.addEventListener("resize", () => {
 			scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
 		scroll.style.height = `${scrollBlockHeight}px`;
-	} else {
+	} else if (!scrollBar.className.includes("hiden")) {
 		scrollBar.className = "scroll-bar hiden";
 	}
 })
@@ -180,6 +187,7 @@ function customScrollBar() {
 	if (contentCH >= contentSH) {
 		scrollBar.className = "scroll-bar hiden";
 	} else if (!scrollBar.className.includes("hiden")) {
+		console.log("移除")
 		scrollBar.className = "scroll-bar";
 	}
 
@@ -213,6 +221,7 @@ function customScrollBar() {
 			return true;
 		}
 		if (!scrollBar.className.includes("hiden")) {
+			console.log("移除")
 			scrollBar.className = "scroll-bar";
 		}
 	};
@@ -223,6 +232,7 @@ function customScrollBar() {
 			return true;
 		}
 		if (!scrollBar.className.includes("hiden")) {
+			console.log("移除")
 			scrollBar.className = "scroll-bar";
 		}
 	}

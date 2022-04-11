@@ -4,11 +4,11 @@ html.dark {
 	--url-color: rgb(187, 200, 213);
 	--body-bgcolor: rgb(30, 36, 40);
 	--box-shadow-color: rgba(0, 0, 0, 0.15);
-	--post-other-color: rgba(108, 132, 151,1);
+	--post-other-color: rgba(108, 132, 151, 1);
 	--post-data-color: rgb(103, 126, 146);
 	--default-bgcolor: rgb(57, 66, 75);
 	--default-box-shadow-color: rgba(0, 0, 0, 0.05);
-	--item-color: rgba(138, 162, 181,1);
+	--item-color: rgba(138, 162, 181, 1);
 	/* 悬浮栏 */
 	--fixel-nav-bgcolor: rgba(0, 0, 0, 0.4);
 	--back-link-color: rgba(221, 221, 221, 1);
