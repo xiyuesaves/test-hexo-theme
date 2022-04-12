@@ -1,5 +1,4 @@
 <%
-	console.log(page)
 	let total = page.total,
 		current = page.current,
 		prev = page.prev,
@@ -7,7 +6,6 @@
 		maxShowPage = theme.page.maxShowPage - 1,
 		startPage = (() => {
 			let starPage = current - Math.floor(maxShowPage/2);
-			console.log("page1",starPage)
 			if (starPage <= 0) {
 				return 1;
 			}

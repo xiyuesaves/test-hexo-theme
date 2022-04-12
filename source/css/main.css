@@ -198,7 +198,7 @@ body::-webkit-scrollbar {
 	background-repeat: no-repeat;
 	background-position: inherit;
 	background-image: inherit;
-	transition: 300ms;
+	transition: filter 300ms;
 }
 
 #top-pic .bgi.shadow-blur::after {

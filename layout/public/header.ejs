@@ -26,7 +26,6 @@
 	let title = config.title,
 		subtitle = config.subtitle,
 		isPost = false;
-
 	if(page.layout){
 		switch(page.layout){ // 主要页面
 			case "tags":
@@ -109,7 +108,7 @@
 			%>
 				<div class="detail-item">
 					<h1 class="big-title"><%-title%></h1>
-					<p class="author"><%-config.author%> 发布于 <span title="<%-new Date(page.date)%>"><%-releaseDate%></span> </p>
+					<p class="author">发布于 <span title="<%-new Date(page.date)%>"><%-releaseDate%></span> </p>
 					<%if(page.categories.length){%>
 						<div class="other-data categories">
 							<i class="icons i-categories"></i>
