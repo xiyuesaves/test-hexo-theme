@@ -63,6 +63,10 @@ const pjax = new Pjax({
 					picUrl = newUrl.replace(/^url\("/, "").replace(/"\)$/, ""),
 					newImg = document.createElement("img");
 				newImg.src = picUrl;
+				newImg.onerror = (err) =>{
+					console.log("头图加载失败",err);
+					this.onSwitch();
+				}
 				newImg.onload = () => {
 					newPic.className = "bgi";
 					newPic.style.backgroundImage = newUrl;
@@ -138,11 +142,11 @@ function showScroll() {
 		console.log(scrollBar.className, scroll.offsetHeight, scrollBlockHeight)
 		if (scrollBar.className.includes("hiden") && scroll.offsetHeight !== scrollBlockHeight) {
 			scroll.style.transition = "all 0ms";
+			scroll.style.height = `${scrollBlockHeight}px`;
 			setTimeout(() => {
-				scroll.style.height = `${scrollBlockHeight}px`;
-				// scroll.style.transition = "";
+				scroll.style.transition = "";
 				scrollBar.className = "scroll-bar";
-			}, 0);
+			}, 10);
 		} else {
 			scroll.style.height = `${scrollBlockHeight}px`;
 			scrollBar.className = "scroll-bar";
@@ -155,18 +159,17 @@ function showScroll() {
 // 监听页面尺寸变化修改滚动条滑块参数
 window.addEventListener("resize", () => {
 	if (!pageLoading) {
-		return
-	}
-	if (document.body.scrollHeight > window.innerHeight) {
-		if (scrollBar.className.includes("hiden")) {
-			scrollBar.className = "scroll-bar";
+		if (document.body.scrollHeight > window.innerHeight) {
+			if (scrollBar.className.includes("hiden")) {
+				scrollBar.className = "scroll-bar";
+			}
+			let scrollBlockHeight = Math.round(window.innerHeight * (window.innerHeight / document.body.scrollHeight)),
+				scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
+			scroll.style.height = `${scrollBlockHeight}px`;
+		} else if (!scrollBar.className.includes("hiden")) {
+			scrollBar.className = "scroll-bar hiden";
 		}
-		let scrollBlockHeight = Math.round(window.innerHeight * (window.innerHeight / document.body.scrollHeight)),
-			scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
-		scroll.style.height = `${scrollBlockHeight}px`;
-	} else if (!scrollBar.className.includes("hiden")) {
-		scrollBar.className = "scroll-bar hiden";
 	}
 })
 
@@ -187,7 +190,6 @@ function customScrollBar() {
 	if (contentCH >= contentSH) {
 		scrollBar.className = "scroll-bar hiden";
 	} else if (!scrollBar.className.includes("hiden")) {
-		console.log("移除")
 		scrollBar.className = "scroll-bar";
 	}
 
@@ -221,7 +223,6 @@ function customScrollBar() {
 			return true;
 		}
 		if (!scrollBar.className.includes("hiden")) {
-			console.log("移除")
 			scrollBar.className = "scroll-bar";
 		}
 	};
@@ -232,7 +233,6 @@ function customScrollBar() {
 			return true;
 		}
 		if (!scrollBar.className.includes("hiden")) {
-			console.log("移除")
 			scrollBar.className = "scroll-bar";
 		}
 	}
@@ -268,7 +268,7 @@ function initToc() {
 }
 
 // 激活目录
-document.addEventListener("scroll", function() {
+function tocFun() {
 	if (showToc) {
 		postToc.forEach((el, index) => {
 			let realEl = document.querySelector(`[title="${el.innerText}"]`);
@@ -284,12 +284,27 @@ document.addEventListener("scroll", function() {
 			}
 		})
 	}
+}
+
+// 顶栏图片分层滚动效果
+function bannerScrollFun(argument) {
+	const scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+		bannerHeight = document.querySelector("#top-pic .bgi").offsetHeight,
+		showHeight = bannerHeight - scrollTop;
+	if (showHeight > 0) {
+		document.querySelector("#top-pic .bgi").style.backgroundPosition = `center ${50 - (30 * (scrollTop / bannerHeight))}%`
+	}
+}
+
+document.addEventListener("scroll", function() {
+	tocFun();
+	bannerScrollFun();
 })
 
 function isInViewPortOfOne(el) {
 	const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	const offsetTop = el.offsetTop;
-	const scrollTop = document.documentElement.scrollTop;
+	const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 	const top = offsetTop - scrollTop + (viewPortHeight / 3) * 2; // 增加像素偏移,让标题居中偏上后再激活
 	return top <= viewPortHeight;
 }

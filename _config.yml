@@ -11,8 +11,9 @@ menu:
   #- tags #标签
   - about #关于
 
-fixelMenu: true
+fixelMenu: false
 
+# 翻页展示最多几个 - 不重要
 page:
   maxShowPage: 5
 
