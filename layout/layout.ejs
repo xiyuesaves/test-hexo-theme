@@ -2,7 +2,19 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><%- config.title %></title>
+	<%
+		let title = config.title;
+		if (page.title) {
+			title = `${page.title} | ${title}`;
+		} else if (page.tag) {
+			title = `标签：${page.tag} | ${title}`;
+		} else if (page.category) {
+			title = `分类：${page.category} | ${title}`;
+		} else if (page.archive) {
+			title = `归档 | ${title}`;
+		}
+	%>
+	<title><%- title %></title>
 	<!-- 所有样式全在此处一次性加载 -->
 	<!-- 主题配色 -->
 	<%- css('css/color-themer.css') %>
@@ -31,13 +43,11 @@
 	<!-- 额外引入字体 -->
   <!-- Lite version -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.0.0/style.css" />
   <style>
-    body {
-      font-family: "LXGW WenKai", sans-serif;
+    .top-title {
+    	font-family: lxgw wenkai;
     }
-		body .markdown-body {
-			font-family: "LXGW WenKai", sans-serif;
-		}
   </style>
 </head>
 <body>
@@ -64,4 +74,15 @@
 <%- js('js/pjax.min.js') %>
 <%- js('js/topbar.min.js') %>
 <%- js('js/main.js') %>
+
+<!-- google 统计 -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H328L9CE1V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H328L9CE1V');
+</script>
+
 </html>

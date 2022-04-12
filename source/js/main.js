@@ -19,11 +19,49 @@ initToc();
 
 // pjax初始化
 const pjax = new Pjax({
-	selectors: ["#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
+	selectors: ["title", "#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
 	cacheBust: false, // 阻止携带时间戳
 	scrollTo: false, // 阻止滚动到指定位置
 	scrollRestoration: false, // 阻止切换页面时回到上次位置
 	switches: {
+		async"title-disable"(oldEl, newEl) { // 动态切换标题，但是实际效果太差所以禁用，不知道后面会不会用到这个算法所以先留着 =-=
+			let stopStart = false,
+				stopEnd = false,
+				startText = oldEl.innerText.split("").filter(item => {
+					if (!stopStart) {
+						if (newEl.innerText.split("").indexOf(item) > -1) {
+							return true;
+						} else {
+							stopStart = !stopStart;
+							return false;
+						}
+					}
+					return false;
+				}).join(""),
+				endText = oldEl.innerText.split("").reverse().filter(item => {
+					if (!stopEnd) {
+						if (newEl.innerText.split("").reverse().indexOf(item) > -1) {
+							return true;
+						} else {
+							stopEnd = !stopEnd;
+							return false;
+						}
+					}
+					return false;
+				}).reverse().join(""),
+				rechangeText = oldEl.innerText.replace(startText,"").replace(endText,"");
+				changeText = newEl.innerText.replace(startText,"").replace(endText,"");
+			for (var i = rechangeText.length; i > 0; i--) {
+				rechangeText = rechangeText.slice(0,rechangeText.length -1);
+				document.title = `${startText}${rechangeText}${endText}`;
+				await new Promise((rj,re) => setTimeout(rj,100));
+			}
+			for (var i = changeText.length; i > 0; i--) {
+				document.title = `${startText}${changeText.slice(0,(changeText.length+1) - i)}${endText}`;
+				await new Promise((rj,re) => setTimeout(rj,100));
+			}
+			this.onSwitch();
+		},
 		"#main-block .center-block"(oldEl, newEl) { // 正文
 			let mainEl = document.querySelector("#main-block");
 			mainEl.style.opacity = 0;
@@ -63,8 +101,8 @@ const pjax = new Pjax({
 					picUrl = newUrl.replace(/^url\("/, "").replace(/"\)$/, ""),
 					newImg = document.createElement("img");
 				newImg.src = picUrl;
-				newImg.onerror = (err) =>{
-					console.log("头图加载失败",err);
+				newImg.onerror = (err) => {
+					console.log("头图加载失败", err);
 					this.onSwitch();
 				}
 				newImg.onload = () => {
@@ -139,7 +177,6 @@ function showScroll() {
 		let scrollBlockHeight = Math.round(window.innerHeight * (window.innerHeight / document.body.scrollHeight)),
 			scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 		scroll.style.transform = `translateY(${(scrollTop / window.innerHeight) * 100}%)`;
-		console.log(scrollBar.className, scroll.offsetHeight, scrollBlockHeight)
 		if (scrollBar.className.includes("hiden") && scroll.offsetHeight !== scrollBlockHeight) {
 			scroll.style.transition = "all 0ms";
 			scroll.style.height = `${scrollBlockHeight}px`;
