@@ -16,7 +16,7 @@ html.dark {
 	--back-link-border-color: rgba(240, 240, 240, 1);
 	--back-link-text-shadow-color: transparent;
 	/* banner */
-	--banner-text-color: rgba(235, 235, 235, 1);
+	--banner-text-color: rgba(250, 250, 250, 1);
 	--banner-text-shadow-color: rgba(0, 0, 0, 0.7);
 	--top-title-text-shadow-color: rgba(0, 0, 0, 0.5);
 	/* 行内代码块 */

@@ -169,6 +169,7 @@ body::-webkit-scrollbar {
 	transition: opacity 600ms;
 	background-size: 0px;
 	background-position: center 50%;
+	filter: brightness(95%);
 }
 
 #top-pic .bgi::before {
@@ -183,8 +184,6 @@ body::-webkit-scrollbar {
 	background-repeat: no-repeat;
 	background-position: inherit;
 	background-image: inherit;
-	pointer-events: auto;
-	pointer-events: none;
 }
 
 #top-pic .bgi::after {
@@ -200,7 +199,6 @@ body::-webkit-scrollbar {
 	background-position: inherit;
 	background-image: inherit;
 	transition: 300ms;
-	pointer-events: none;
 }
 
 #top-pic .bgi.shadow-blur::after {
@@ -407,7 +405,7 @@ body::-webkit-scrollbar {
 #main .center-block .sidebar-item {
 	position: sticky;
 	top: 68px;
-	width: 320px;
+	width: 290px;
 	min-height: 100px;
 	height: auto;
 	max-height: 100%;
@@ -470,7 +468,7 @@ body::-webkit-scrollbar {
 #main .center-block .sidebar-item .sidebar {
 	width: 100%;
 	height: auto;
-	padding: 15px 30px;
+	padding: 15px;
 	border-radius: 8px;
 	margin-bottom: 28px;
 	background-color: var(--default-bgcolor);
