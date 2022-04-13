@@ -10,9 +10,11 @@
 	%>
 		<div class="post">
 			<a class="link title" href="/<%- post.path %>"><%- post.title %></a>
-			<div class="introduction markdown-body">
-				<%-post.excerpt%>
-			</div>
+			<% if (post.excerpt) { -%>
+				<div class="introduction markdown-body">
+					<%-post.excerpt%>
+				</div>
+			<% } -%>
 	<%if(post.categories.length){%>
 			<div class="other-data categories">
 				<i class="icons i-categories"></i>

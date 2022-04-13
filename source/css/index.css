@@ -29,6 +29,11 @@
 	white-space: nowrap;
 	display: inline-block;
 	text-overflow: ellipsis;
+	margin-bottom: 12px;
+}
+
+.flex-item .post-list .post .link.title+.other-data{
+	margin-top: 0px;
 }
 
 .flex-item .post-list .post .introduction {

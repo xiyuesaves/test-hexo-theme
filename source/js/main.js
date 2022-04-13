@@ -1,8 +1,12 @@
-let themer = localStorage.getItem('colorThemer'),
-	pageLoading = false;
-if (themer) {
-	document.querySelector("html").className = themer;
-}
+// 页面加载状态
+let	pageLoading = false;
+
+// 初始化目录功能
+let postToc = [],
+	showToc = false;
+initToc();
+
+console.log("%c %c %c %c Hello World!","background:#e16c96","background:#951c48","background:#62102e","background:transparent");
 
 // 设置加载进度条颜色
 topbar.config({
@@ -12,11 +16,6 @@ topbar.config({
 	barThickness: 3
 });
 
-// 初始化目录功能
-let postToc = [],
-	showToc = false;
-initToc();
-
 // pjax初始化
 const pjax = new Pjax({
 	selectors: ["title", "#fixel-nav .center-block", "#main-block .center-block", "#top-pic .bgi", "#top-pic .center-box"],
@@ -24,7 +23,7 @@ const pjax = new Pjax({
 	scrollTo: false, // 阻止滚动到指定位置
 	scrollRestoration: false, // 阻止切换页面时回到上次位置
 	switches: {
-		async"title-disable"(oldEl, newEl) { // 动态切换标题，但是实际效果太差所以禁用，不知道后面会不会用到这个算法所以先留着 =-=
+		async "title-disable"(oldEl, newEl) { // 动态切换标题，但是实际效果太差所以禁用，不知道后面会不会用到这个算法所以先留着 =-=
 			let stopStart = false,
 				stopEnd = false,
 				startText = oldEl.innerText.split("").filter(item => {
@@ -49,16 +48,16 @@ const pjax = new Pjax({
 					}
 					return false;
 				}).reverse().join(""),
-				rechangeText = oldEl.innerText.replace(startText,"").replace(endText,"");
-				changeText = newEl.innerText.replace(startText,"").replace(endText,"");
+				rechangeText = oldEl.innerText.replace(startText, "").replace(endText, "");
+			changeText = newEl.innerText.replace(startText, "").replace(endText, "");
 			for (var i = rechangeText.length; i > 0; i--) {
-				rechangeText = rechangeText.slice(0,rechangeText.length -1);
+				rechangeText = rechangeText.slice(0, rechangeText.length - 1);
 				document.title = `${startText}${rechangeText}${endText}`;
-				await new Promise((rj,re) => setTimeout(rj,100));
+				await new Promise((rj, re) => setTimeout(rj, 100));
 			}
 			for (var i = changeText.length; i > 0; i--) {
 				document.title = `${startText}${changeText.slice(0,(changeText.length+1) - i)}${endText}`;
-				await new Promise((rj,re) => setTimeout(rj,100));
+				await new Promise((rj, re) => setTimeout(rj, 100));
 			}
 			this.onSwitch();
 		},
@@ -355,38 +354,4 @@ function goto(title) {
 		left: 0,
 		behavior: "smooth"
 	});
-}
-
-// 主题切换
-let switchIn = false;
-
-function changeThemer(type) {
-	if (!switchIn) {
-		let htmlEl = document.querySelector("html")
-		if (["dark", "light"].indexOf(type) !== -1) {
-			switchIn = true;
-			htmlEl.className = `transition-color `;
-			localStorage.setItem('colorThemer', type);
-			setTimeout(() => {
-				htmlEl.className += type;
-			}, 0);
-			// 只有过度时间是指定时间的事件触发时才判定为结束
-			let transitionEnd = (event) => {
-				if (event.elapsedTime === 0.6) {
-					switchIn = false;
-					htmlEl.className = type;
-					document.body.removeEventListener("transitionend", transitionEnd);
-				}
-			}
-			document.body.addEventListener("transitionend", transitionEnd, false);
-		} else {
-			// 自动切换
-			let thisType = htmlEl.className || "light";
-			if (thisType === "dark") {
-				changeThemer("light");
-			} else {
-				changeThemer("dark");
-			}
-		}
-	}
 }

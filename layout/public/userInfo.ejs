@@ -1,6 +1,8 @@
 <!-- 用户信息模块 -->
 <div class="sidebar user-info">
-	<div class="avatar" style="background-image:url(<%-theme.avatar%>)">		</div>
+	<div class="avatar" style="background-image:url(<%-theme.avatar%>)">
+		<img style="opacity: 0;" src="<%-theme.avatar%>">
+	</div>
 	<h1 class="author"><%-config.author%></h1>
 	<p class="subtitle"><%-config.subtitle%></p>
 	<div class="count-item">
@@ -16,5 +18,9 @@
 			<i class="icons i-tags"></i>
 			<%-site.tags.length%>
 		</span>
+	</div>
+	<div class="switch-theme light">
+		<i title="亮色" class="icons i-light-theme"></i>
+		<i title="暗色" class="icons i-dark-theme"></i>
 	</div>
 </div>

@@ -17,6 +17,7 @@ html.transition-color * {
 		box-shadow 600ms,
 		text-shadow 600ms,
 		filter 600ms,
+		opacity 600ms,
 		border-color 600ms !important;
 }
 
@@ -236,13 +237,14 @@ body::-webkit-scrollbar {
 
 #top-pic .top-title .big-title {
 	text-align: center;
-	font-size: 46px;
+	font-size: 64px;
 	text-shadow: 0 2px 10px var(--top-title-text-shadow-color);
 }
 
 #top-pic .top-title p {
 	text-align: center;
-	margin-top: 16px;
+	margin-top: 8px;
+	font-size: 18px;
 	font-weight: 600;
 	text-shadow: 0 2px 4px var(--top-title-text-shadow-color);
 }
@@ -427,6 +429,12 @@ body::-webkit-scrollbar {
 	background-position: center;
 	background-repeat: no-repeat;
 	box-shadow: 0 8px 20px var(--user-info-box-shadow-color);
+	overflow: hidden;
+}
+
+#main .center-block .sidebar-item .user-info .avatar img{
+	width: 100%;
+	height: 100%;
 }
 
 #main .center-block .sidebar-item .user-info .author {
@@ -463,6 +471,40 @@ body::-webkit-scrollbar {
 	transition: inherit;
 	font-size: 22px;
 	margin-right: 4px;
+}
+
+#main .center-block .sidebar-item .user-info .switch-theme{
+	width: 100%;
+	height: 40px;
+	position: relative;
+	margin-top: 15px;
+}
+
+/* 主题图标切换 */
+#main .switch-theme .icons{
+	font-size: 32px;
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}
+
+:root.light #main .switch-theme .i-light-theme,
+:root.dark #main .switch-theme .i-dark-theme{
+	opacity: 0;
+	pointer-events: none;
+}
+
+:root #main .switch-theme .i-light-theme,
+:root.dark #main .switch-theme .i-light-theme{
+	pointer-events: auto;
+	opacity: 1;
+}
+
+:root.light #main .switch-theme .i-dark-theme{
+	pointer-events: auto;
+	opacity: 1;
 }
 
 #main .center-block .sidebar-item .sidebar {

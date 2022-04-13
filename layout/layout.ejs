@@ -13,6 +13,7 @@
 		} else if (page.archive) {
 			title = `归档 | ${title}`;
 		}
+		title += title + theme.title_suffix;
 	%>
 	<title><%- title %></title>
 	<!-- 所有样式全在此处一次性加载 -->
@@ -33,7 +34,7 @@
 	<!-- github MD样式 -->
 	<%- css('css/github-markdown.css') %>
 	<!-- 图标 -->
-	<%- css('//at.alicdn.com/t/font_3205213_h4o1lfj9uh.css')%>
+	<%- css('//at.alicdn.com/t/font_3205213_us4lrt7ldb.css')%>
 	<!-- 动态计算样式 -->
 	<style type="text/css">
 		.sidebar-item{
@@ -49,6 +50,7 @@
     	font-family: lxgw wenkai;
     }
   </style>
+<%- js('js/switchTheme.js') %>
 </head>
 <body>
 	<div id="main">

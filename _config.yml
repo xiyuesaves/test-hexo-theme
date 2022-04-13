@@ -19,3 +19,6 @@ page:
 
 # 默认背景图
 backgroundImage: /img/bg.jpg
+
+# 标题后缀
+title_suffix: ' - Blog'

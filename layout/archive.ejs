@@ -44,9 +44,11 @@
 				<div class="post" href="/<%-post.path%>">
 					<%if (!isArchive) {%>
 					<a href="/<%-post.path%>" class="link title"><%-post.title%></a>
-					<div class="introduction markdown-body">
-						<%-post.excerpt%>
-					</div>
+					<% if (post.excerpt && false) { -%>
+						<div class="introduction markdown-body">
+							<%-post.excerpt%>
+						</div>
+					<%}%>
 					<%} else {%>
 					<a href="/<%-post.path%>" class="titles"><%-post.title%></a>
 					<%}if(post.categories.length){%>
