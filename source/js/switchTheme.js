@@ -5,8 +5,8 @@ if (themer) {
 }
 
 // 图标添加点击事件
-document.addEventListener('DOMContentLoaded',addChangeEvent);
-document.addEventListener('pjax:complete',addChangeEvent);
+document.addEventListener('DOMContentLoaded',addChangeEvent, false);
+document.addEventListener('pjax:complete',addChangeEvent, false);
 
 function addChangeEvent() {
 	document.querySelectorAll(".switch-theme .icons").forEach(el => {
@@ -28,7 +28,7 @@ function changeThemer(type) {
 			setTimeout(() => {
 				htmlEl.className += type;
 			}, 0);
-			// 只有过度时间是指定时间的事件触发时才判定为结束
+			// 因为会触发多个结束事件，所以只有当触发事件和规定时间相同时才结束
 			let transitionEnd = (event) => {
 				if (event.elapsedTime === 0.6) {
 					switchIn = false;
