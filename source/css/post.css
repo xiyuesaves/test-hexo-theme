@@ -12,3 +12,10 @@
 	padding: 30px 15px;
 	box-shadow: 0 8px 20px var(--default-box-shadow-color);
 }
+
+.post-content .post img{
+	display: block;
+	margin: 0 auto;
+	border-radius: 6px;
+	box-shadow: 0 4px 12px var(--box-shadow-color);
+}
