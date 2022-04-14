@@ -646,3 +646,23 @@ body::-webkit-scrollbar {
 .scroll-bar.active .scroll-block::after {
 	background-color: var(--scroll-active-bgcolor);
 }
+
+.fooder {
+	width: 100%;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: 16px!important;
+	font-size: 14px!important;
+}
+
+.fooder p,.fooder a{
+	margin-bottom: 4px!important;	
+}
+.fooder .icons{
+	display: inline-block;
+	font-size: 12px;
+	transform: translateY(-1px);
+}
