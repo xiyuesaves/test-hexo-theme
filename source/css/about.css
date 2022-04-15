@@ -1,0 +1,8 @@
+.about-content{
+	width: 100%;
+	min-height: 300px;
+	background-color: var(--default-bgcolor);
+	border-radius: 8px;
+	box-shadow: 0 8px 20px var(--user-info-box-shadow-color);
+	padding: 30px 15px;
+}

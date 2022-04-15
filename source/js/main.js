@@ -1,4 +1,4 @@
-console.log("%c %c %c %c Hello World!","background:#e16c96","background:#951c48","background:#62102e","background:transparent");
+console.log("%c %c %c %c Hello World!", "background:#e16c96", "background:#951c48", "background:#62102e", "background:transparent");
 // 设置加载进度条颜色
 topbar.config({
   barColors: {

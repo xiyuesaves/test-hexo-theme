@@ -1,7 +1,22 @@
 <!-- 文章详情 -->
 <div class="post-content">
-	<div class="post markdown-body">
-		<%- page.content %>
+	<div class="post">
+		<div class="content markdown-body">
+			<%- page.content %>
+		</div>
+
+		<div class="prev-next-post">
+			<div class="prev-post">
+				<% if (page.prev) { -%>
+					<a href="/<%-page.prev.path%>" href=""><%-page.prev.title%></a>
+				<% } %>
+			</div>
+			<div class="next-post">
+				<% if (page.next) { -%>
+					<a href="/<%-page.next.path%>"><%-page.next.title%></a>
+				<% } -%>
+			</div>
+		</div>
 	</div>
 	<div class="sidebar-item">
 		<!-- 用户信息 -->

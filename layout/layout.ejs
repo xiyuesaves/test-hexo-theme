@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<base target="_blank">
 	<%
 		let title = config.title;
 		if (page.title) {
@@ -31,6 +32,8 @@
 	<%- css('css/page.css') %>
 	<!-- 归档样式 -->
 	<%- css('css/archives.css') %>
+	<!-- 关于 -->
+	<%- css('css/about.css') %>
 	<!-- github MD样式 -->
 	<%- css('css/github-markdown.css') %>
 	<!-- 图标 -->
@@ -70,7 +73,7 @@
 			<!-- 底栏 -->
 			<div class="fooder markdown-body">
 				<a href="https://beian.miit.gov.cn/">蜀ICP备20013501号</a>
-				<p>© 2020–2022 <i class="icons i-about"></i> 曦月</p>
+				<p>© 2020–<%-new Date().getFullYear()%> <i class="icons i-about"></i> 曦月</p>
 				<p>由 <a href="">hexo</a> 驱动 | 主题 <a href="">test-theme</a></p>
 			</div>
 		</div>
@@ -78,7 +81,7 @@
 </body>
 <!-- 脚本 -->
 <%- js('js/SmoothScroll.min.js') %>
-<%- js('js/chineseColor.js') %>
+<!-- <%- js('js/chineseColor.js') %> -->
 <%- js('js/pjax.min.js') %>
 <%- js('js/topbar.min.js') %>
 <%- js('js/scroll.js') %>

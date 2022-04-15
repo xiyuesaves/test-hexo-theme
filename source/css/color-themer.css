@@ -57,11 +57,11 @@ html {
 	--color: rgba(62, 62, 70, 1);
 	--url-color: rgba(62, 62, 70, 1);
 	--body-bgcolor: rgba(245, 248, 250, 1);
-	--box-shadow-color: rgba(0, 0, 0, 0.15);
+	--box-shadow-color: rgba(0, 0, 0, 0.05);
 	--post-other-color: rgba(153, 153, 153, 1);
 	--post-data-color: rgba(170, 170, 170, 1);
 	--default-bgcolor: rgba(255, 255, 255, 1);
-	--default-box-shadow-color: rgba(0, 0, 0, 0.05);
+	--default-box-shadow-color: rgba(0, 0, 0, 0.03);
 	--item-color: rgba(100, 100, 100, 1);
 	/* 悬浮栏 */
 	--fixel-nav-bgcolor: rgba(255, 255, 255, 0.8);

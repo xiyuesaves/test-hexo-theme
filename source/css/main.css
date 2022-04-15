@@ -432,7 +432,7 @@ body::-webkit-scrollbar {
 	overflow: hidden;
 }
 
-#main .center-block .sidebar-item .user-info .avatar img{
+#main .center-block .sidebar-item .user-info .avatar img {
 	width: 100%;
 	height: 100%;
 }
@@ -473,7 +473,7 @@ body::-webkit-scrollbar {
 	margin-right: 4px;
 }
 
-#main .center-block .sidebar-item .user-info .switch-theme{
+#main .center-block .sidebar-item .user-info .switch-theme {
 	width: 100%;
 	height: 40px;
 	position: relative;
@@ -481,7 +481,7 @@ body::-webkit-scrollbar {
 }
 
 /* 主题图标切换 */
-#main .switch-theme .icons{
+#main .switch-theme .icons {
 	font-size: 32px;
 	cursor: pointer;
 	position: absolute;
@@ -491,18 +491,18 @@ body::-webkit-scrollbar {
 }
 
 :root.light #main .switch-theme .i-light-theme,
-:root.dark #main .switch-theme .i-dark-theme{
+:root.dark #main .switch-theme .i-dark-theme {
 	opacity: 0;
 	pointer-events: none;
 }
 
 :root #main .switch-theme .i-light-theme,
-:root.dark #main .switch-theme .i-light-theme{
+:root.dark #main .switch-theme .i-light-theme {
 	pointer-events: auto;
 	opacity: 1;
 }
 
-:root.light #main .switch-theme .i-dark-theme{
+:root.light #main .switch-theme .i-dark-theme {
 	pointer-events: auto;
 	opacity: 1;
 }
@@ -534,7 +534,7 @@ body::-webkit-scrollbar {
 	height: auto;
 }
 
-#main .center-block .sidebar-item .sidebar .list-item *{
+#main .center-block .sidebar-item .sidebar .list-item * {
 	color: var(--item-color);
 }
 
@@ -626,7 +626,6 @@ body::-webkit-scrollbar {
 	width: 16px;
 }
 
-
 .scroll-bar .scroll-block::after {
 	content: "";
 	border-radius: 4px;
@@ -654,14 +653,16 @@ body::-webkit-scrollbar {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	margin-bottom: 16px!important;
-	font-size: 14px!important;
+	margin-bottom: 16px !important;
+	font-size: 14px !important;
 }
 
-.fooder p,.fooder a{
-	margin-bottom: 4px!important;	
+.fooder p,
+.fooder a {
+	margin-bottom: 4px !important;
 }
-.fooder .icons{
+
+.fooder .icons {
 	display: inline-block;
 	font-size: 12px;
 	transform: translateY(-1px);

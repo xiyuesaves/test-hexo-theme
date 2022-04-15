@@ -3,7 +3,6 @@ let postToc = [],
   showToc = false;
 initToc();
 
-
 // 目录初始化
 function initToc() {
   if (document.querySelector(".toc")) {
