@@ -6,29 +6,35 @@
 	</h1>
 	<div class="list-item">
 		<%
-			let categories = site.categories.map(el => el),
-				level = 1,
-				showIcons = false;
-			function showIcon(slug){
-				let thisLevel = slug.split("/").length
-				if(thisLevel > level){
-					level = thisLevel;
-					showIcons = true;
-				} else {
-					level = thisLevel;
-					showIcons = false;
-				};
+			function categorys(arr) {
+				arr.forEach(el => {
+					if (el.parent) {
+						let finds = arr.find(_el => _el._id === el.parent);
+						if (!finds.child) {
+							finds.child = new Array();
+						}
+						finds.child.push(el);
+					}
+				})
+				let	id = [];
+				function render(_arr,deep = 0) {
+					let html = "";
+					_arr.forEach((el,index) => {
+						if (id.indexOf(el._id) === -1) {
+							html += `<p style="padding-left:${30 * deep}px" class="categories">
+							${index === 0 && deep !== 0 ? `<i class="icons next-level i-next-level"></i>` : ''}
+							<a href="/${el.path}">${el.name}</a>
+							<span>(${el.posts.length})</span>
+							</p>
+							${el.child ? render(el.child,deep + 1) : ""}`
+							id.push(el._id);
+						}
+					})
+					return html;
+				}
+				return render(arr);
 			}
-			site.categories.forEach(el => {
-			showIcon(el.slug);
 		%>
-			<p style="padding-left:<%-showIcons ? 32 * (level - 2) + 10 : 30 * (level - 1)%>px" class="categories">
-				<%if(showIcons){%>
-					<i class="icons next-level i-next-level"></i>
-				<%}%>
-				<a href="/<%-el.path%>"><%-el.name%></a>
-				<span>(<%-el.posts.length%>)</span>
-			</p>
-		<%})%>
+		<%- categorys(site.categories.map(el => el)) %>
 	</div>
 </div>
