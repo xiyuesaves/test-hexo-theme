@@ -7,7 +7,15 @@ initToc();
 function initToc() {
   if (document.querySelector(".toc")) {
     showToc = true;
-    postToc = document.querySelectorAll(".toc ul p");
+    postToc = document.querySelectorAll(".toc ol a");
+    postToc.forEach(el => {
+      el.addEventListener("click", function(event) {
+        event.preventDefault();
+        console.log(this)
+        goto(this.querySelector(".toc-text").innerText);
+      })
+    })
+
   } else {
     showToc = false;
   }
@@ -27,9 +35,9 @@ document.addEventListener('pjax:complete', () => {
 function tocFun() {
   if (showToc) {
     postToc.forEach((el, index) => {
-      let realEl = document.querySelector(`[title="${el.innerText}"]`);
+      let realEl = document.querySelector(`[title="${el.querySelector(".toc-text").innerText}"]`);
       if (realEl && isInViewPortOfOne(realEl)) {
-        let nextEl = postToc[index + 1] ? document.querySelector(`[title="${postToc[index + 1].innerText}"]`) : null;
+        let nextEl = postToc[index + 1] ? document.querySelector(`[title="${postToc[index + 1].querySelector(".toc-text").innerText}"]`) : null;
         if (nextEl && isInViewPortOfOne(nextEl)) {
           el.className = " read";
         } else {

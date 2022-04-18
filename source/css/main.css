@@ -337,7 +337,6 @@ body::-webkit-scrollbar {
 
 .post-content .highlight tr {
 	display: flex;
-	border-radius: 6px;
 	overflow: hidden;
 }
 
@@ -360,7 +359,7 @@ body::-webkit-scrollbar {
 }
 
 .post-content .highlight table .code {
-	width: calc(710px + 87px);
+	width: calc(710px + 83px);
 }
 
 /* 滚动条整体 */
@@ -572,25 +571,26 @@ body::-webkit-scrollbar {
 	height: auto;
 }
 
-#main .center-block .sidebar-item .toc .read {
+#main .center-block .sidebar-item .toc .read span{
 	color: var(--toc-read-color);
 }
 
-#main .center-block .sidebar-item .toc .active {
+#main .center-block .sidebar-item .toc .active span{
 	color: var(--toc-active-color);
 }
 
-#main .center-block .sidebar-item .toc ul {
+#main .center-block .sidebar-item .toc ol {
 	list-style: none;
 }
 
-#main .center-block .sidebar-item .toc ul p {
+#main .center-block .sidebar-item .toc ol a {
+	display: inline-block;
 	cursor: pointer;
 	margin-bottom: 8px;
 	transition: color 150ms;
 }
 
-#main .center-block .sidebar-item .toc ul ul {
+#main .center-block .sidebar-item .toc ol ol {
 	padding-left: 20px;
 }
 

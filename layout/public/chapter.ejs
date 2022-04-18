@@ -1,41 +1,15 @@
-<%
-	let mdTocList = page.raw.match(/(\r\n|\r|\n|^)#+\s.+/g) || [],
-		h2List = h3List = [];
-		mdTocList.forEach(el => {
-			let newEl = el.replace(/\s/,"");
-			if (newEl.match(/^#{2}\s/) || newEl.match(/^#\s/)) {
-				h3List = new Array();
-				h2List.push({node: newEl.replace(/#+\s/,""),children: h3List})
-			}
-			if (newEl.match(/^#{3}\s/)) {
-				h3List.push({node: newEl.replace(/#+\s/,"")})
-			}
-		})
-	if(h2List.length){
-%>
 <!-- 目录模块 -->
-<div class="sidebar toc">
-	<h1 class="big-title">
-		<i class="icons i-chapter"></i>
-		TOC
-	</h1>
-	<div class="list-item toc">
-		<ul>
-			<%h2List.forEach(el => {%>
-				<li>
-					<p onclick="goto('<%-el.node %>')"><%-el.node%></p>
-					<%if(el.children){%>
-						<ul>
-							<%el.children.forEach(el => {%>
-								<li>
-									<p onclick="goto('<%-el.node %>')"><%-el.node%></p>
-								</li>
-							<%})%>
-						</ul>
-					<%}%>
-				</li>
-			<%})%>
-		</ul>
+<% 
+	let tocEl =  toc(page.content,{list_number:true});
+	if (tocEl) { 
+-%>
+	<div class="sidebar toc">
+		<h1 class="big-title">
+			<i class="icons i-chapter"></i>
+			TOC
+		</h1>
+		<div class="list-item toc">
+			<%- tocEl %>
+		</div>
 	</div>
-</div>
-<%}%>
+<% } -%>
