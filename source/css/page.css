@@ -1,6 +1,6 @@
 .pages {
 	width: 100%;
-	height: 20px;
+	height: 30px;
 	list-style: none;
 	display: flex;
 	align-items: center;
@@ -8,7 +8,8 @@
 	margin-top: 60px;
 }
 
-.pages li a {
+.pages .page-number,
+.pages .extend {
 	display: block;
 	height: 100%;
 	width: 30px;
@@ -36,7 +37,8 @@
 	background-color: var(--default-bgcolor);
 }
 
-.pages .on-choose {
+.pages .on-choose,
+.pages .current {
 	box-shadow: 0 8px 20px var(--page-box-shadow-color);
 	background-color: var(--default-bgcolor);
 }

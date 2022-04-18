@@ -564,6 +564,7 @@ body::-webkit-scrollbar {
 
 #main .center-block .sidebar-item .sidebar .list-item .categories .next-level {
 	margin-right: 4px;
+	margin-left: -20px;
 }
 
 #main .center-block .sidebar-item .toc {
