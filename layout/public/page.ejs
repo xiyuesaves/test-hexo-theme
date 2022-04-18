@@ -1,7 +1,11 @@
-<div class="pages">
-	<%- paginator({
-  prev_text: '<i class="icons i-prev-page"></i>',
-  next_text: '<i class="icons i-next-page"></i>',
-  escape: false
-}) %>
-</div>
+<% if (page.total > 1) { -%>
+  <div class="pages">
+    <%- paginator({
+        prev_text: '<i class="icons i-prev-page"></i>',
+        next_text: '<i class="icons i-next-page"></i>',
+        escape: false
+      }) 
+    %>
+  </div>
+<% } -%>
+
