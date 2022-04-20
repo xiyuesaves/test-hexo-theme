@@ -557,14 +557,45 @@ body::-webkit-scrollbar {
 	justify-content: flex-start;
 }
 
-#main .center-block .sidebar-item .sidebar .list-item .categories span {
-	font-size: 12px;
-	margin-left: 2px;
+.list-item * {
+	list-style: none;
 }
 
-#main .center-block .sidebar-item .sidebar .list-item .categories .next-level {
-	margin-right: 4px;
+.list-item .category-list-link {
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 6px;
+	display: inline-block;
+}
+
+.list-item .category-list-count {
+	display: inline-block;
+	margin-left: 4px;
+	font-size: 12px;
+	line-height: 20px;
+	transform: translateY(-1px);
+}
+
+.list-item .category-list-count::before {
+	content: "(";
+}
+
+.list-item .category-list-count::after {
+	content: ")";
+}
+
+.list-item .category-list li>ul {
+	padding-left: 30px;
+}
+
+.list-item .category-list li>ul>li:first-child:before {
+	content: "\e683";
 	margin-left: -20px;
+	margin-right: 4px;
+	font-family: "icons" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
 }
 
 #main .center-block .sidebar-item .toc {
@@ -572,11 +603,11 @@ body::-webkit-scrollbar {
 	height: auto;
 }
 
-#main .center-block .sidebar-item .toc .read span{
+#main .center-block .sidebar-item .toc .read span {
 	color: var(--toc-read-color);
 }
 
-#main .center-block .sidebar-item .toc .active span{
+#main .center-block .sidebar-item .toc .active span {
 	color: var(--toc-active-color);
 }
 
